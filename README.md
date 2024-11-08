@@ -31,7 +31,7 @@ This application is powered by a combination of frontend and backend technologie
 
 - **Python (NLP Chatbot)**: A Python file uses Natural Language Processing to power a chatbot that responds to user interactions, providing clues or alibi details from suspects.
 - **NLTK and Keras**: Used for natural language processing tasks, enabling the chatbot to understand and respond to user questions.
-- **Flask or Django (Optional)**: If a server is implemented, Flask or Django can manage the backend interactions and serve the chatbot responses.
+- **Flask**:Flask can manage the backend interactions and serve the chatbot responses.
 
 ## 🌐 How It Works
 
