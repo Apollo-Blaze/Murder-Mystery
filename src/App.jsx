@@ -5,11 +5,11 @@ import './App.css';
 import { BrowserRouter, Link } from 'react-router-dom';
 
 function App() {
-  const [location, setLocation] = useState('diningRoom'); // default location
+  const [location, setLocation] = useState('garden'); // default location
   const [selectedSuspect, setSelectedSuspect] = useState(null);
   const [killerChosen, setKillerChosen] = useState(false); // Track if killer is chosen
 
-  const locations = ['diningRoom', 'kitchen', 'garden', 'study', 'basement', 'balcony'];
+  const locations = [ 'garden', 'diningRoom', 'kitchen', 'study', 'basement', 'balcony'];
 
   const changeLocation = (newLocation) => {
     console.log(newLocation);
@@ -40,7 +40,9 @@ function App() {
                   <Link
                     to='#'
                     onClick={() => changeLocation(loc)}
-                    className='hover:bg-gray-600 px-3 py-2 rounded-md'
+                    className={`px-3 py-2 rounded-md ${
+                      location === loc ? 'text-red-700 font-bold' : 'hover:bg-gray-600'
+                    }`}
                   >
                     {loc.charAt(0).toUpperCase() + loc.slice(1)}
                   </Link>

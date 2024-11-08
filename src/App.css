@@ -1,16 +1,64 @@
 #root {
   margin: 0 auto;
   text-align: center;
+  height: 100%;
+}
+html, body {
+  overflow: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-.diningRoom {
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.garden {
   height: 100vh; 
   background-image: url('./assets/mansion.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
 }
-
+.diningRoom {
+  height: 100vh; 
+  background-image: url('./assets/diningRoom.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.kitchen {
+  height: 100vh; 
+  background-image: url('./assets/kitchen.jpg');
+  background-size:cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.study {
+  height: 100vh; 
+  background-image: url('./assets/study.jpg');
+  background-size:cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.balcony {
+  height: 100vh; 
+  background-image: url('./assets/balcony.jpg');
+  background-size:cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.basement {
+  height: 100vh; 
+  background-image: url('./assets/basement.jpg');
+  background-size:cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
