@@ -13,7 +13,7 @@ const Suspect = ({ name, onClick }) => {
 
   return (
     <div 
-      className="relative mt-4 mb-4 bg-gray-800 rounded-3xl overflow-hidden flex flex-col  items-center h-96 w-72 cursor-pointer pb-0 pt-9" 
+      className="relative mt-4 mb-4 bg-gray-800 rounded-3xl overflow-hidden flex flex-col  items-center min-h-96 max-w-72 max-h-96 min-w-72 cursor-pointer pb-0 pt-9" 
       onClick={() => onClick(name)}
     >
       <p className="text-2xl font-semibold text-white mb-6 align-top">{name}</p>

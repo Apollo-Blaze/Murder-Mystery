@@ -53,11 +53,11 @@ function App() {
         </nav>
 
         {/* Content */}
-        <div className={`min-h-full ${location} bg-hero-pattern bg-cover bg-no-repeat bg-center w-full pt-16`}>
+        <div className={`min-h-full ${location} bg-hero-pattern bg-cover bg-no-repeat bg-center align-middle justify-center flex flex-col items-center`}>
           <div
-            className='mt-0 flex gap-16 mb-6 justify-center py-8 ml-52 mr-52 rounded-3xl'
+            className='flex gap-16 mb-6 justify-center px-10 py-8 w-fit rounded-3xl'
             style={{
-              backgroundColor: 'rgba(72, 72, 92, 0.8)', // Violet color with 50% opacity
+              backgroundColor: 'rgba(72, 72, 92, 0.8)', 
             }}
           >
             {['Alice', 'Bob', 'Clara'].map((suspect) => (
@@ -65,7 +65,7 @@ function App() {
                 key={suspect}
                 name={suspect}
                 onClick={handleSuspectClick}
-                imagePath={`${suspect.toLowerCase()}`} // Path to images
+                imagePath={`${suspect.toLowerCase()}`} 
               />
             ))}
           </div>
