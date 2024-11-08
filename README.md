@@ -44,6 +44,4 @@ This application is powered by a combination of frontend and backend technologie
 
 This project was built as a creative exploration of interactive storytelling, combining skills in frontend development, natural language processing, and UI/UX design.
 
-<video src="./src/assets/murder.mp4" controls="controls" style="max-width: 100%; height: auto;">
-   Your browser does not support the video tag.
-</video>
+![Demo of the Project](src/assets/murder.gif)
