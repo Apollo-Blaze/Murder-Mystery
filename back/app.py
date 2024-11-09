@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import google.generativeai as genai
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app) 
@@ -123,5 +124,6 @@ def choose_killer():
     else:
         return jsonify({"isAlive": False})  # Incorrect killer chosen
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port,debug=False)
