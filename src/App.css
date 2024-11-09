@@ -102,3 +102,22 @@
 .read-the-docs {
   color: #888;
 }
+
+.typing-response-container {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: normal; /* Allows the text to wrap normally */
+  overflow-x: hidden; /* Prevents horizontal overflow */
+}
+.typing-response-container {
+  overflow-x: auto;
+}
+/* Hide the scrollbar but keep the scroll functionality */
+.custom-scrollbar::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar */
+}
+
+.custom-scrollbar {
+  -ms-overflow-style: none;  /* For Internet Explorer 10+ */
+  scrollbar-width: none;      /* For Firefox */
+}
