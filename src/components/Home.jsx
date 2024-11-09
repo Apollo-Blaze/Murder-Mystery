@@ -39,7 +39,7 @@ const Home = () => {
     };
   
     const submitKillerChoice = () => {
-        fetch('http://127.0.0.1:5000/choose_killer', {
+        fetch('https://murder-mystery-qnnb.onrender.com/choose_killer', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ chosen_killer: chosenKiller }),
@@ -63,7 +63,7 @@ const Home = () => {
   
     const handleSubmitInput = () => {
       if (selectedSuspect && userInput) {
-        fetch('http://127.0.0.1:5000/ask_character', {
+        fetch('https://murder-mystery-qnnb.onrender.com/ask_character', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ character: selectedSuspect.toLowerCase(), user_input: userInput }),
