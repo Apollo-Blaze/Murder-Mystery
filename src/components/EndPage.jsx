@@ -29,7 +29,7 @@ const EndPage = () => {
           </div>
         </div>
         <div className="absolute bottom-4 w-full text-center text-white">
-        <p className="text-sm opacity-75">Developed by Apollo Blaze</p>
+        <p className="text-sm opacity-75">Developed by Apollo Blaze.</p>
       </div>
       </div>
     );
