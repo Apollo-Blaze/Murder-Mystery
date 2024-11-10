@@ -30,46 +30,23 @@ body{
 }
 
 .garden {
-  height: 120vh; 
+  height:fit-content; 
   background-image: url('./assets/mansion.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
 }
-.diningRoom {
-  height: 120vh; 
-  background-image: url('./assets/diningRoom.jpg');
+.diningRoom,
+.kitchen,
+.study,
+.balcony,
+.basement {
+  height: fit-content; /* Allow the height to grow based on content */
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-}
-.kitchen {
-  height: 120vh; 
-  background-image: url('./assets/kitchen.jpg');
-  background-size:cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-.study {
-  height: 120vh; 
-  background-image: url('./assets/study.jpg');
-  background-size:cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-.balcony {
-  height: 120vh; 
-  background-image: url('./assets/balcony.jpg');
-  background-size:cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-.basement {
-  height: 120vh; 
-  background-image: url('./assets/basement.jpg');
-  background-size:cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh; /* Optional: keeps the background fixed */
 }
 .logo {
   height: 6em;

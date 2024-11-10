@@ -128,7 +128,7 @@ const Home = () => {
 
     return (
       <>
-          <div className={`relative z-0 min-h-screen bg-${location} bg-yellow-100 bg-cover bg-no-repeat bg-center`}>
+          <div className={`relative z-0 bg-${location} bg-cover min-h-fit bg-center`}>
           {/* Loading Overlay */}
           {isLoading && (
             <motion.div
@@ -211,13 +211,11 @@ const Home = () => {
     )}
 
     {/* Typing Effect Response, Positioned Below */}
-    {showControls && displayedResponse && (
-    <div className="flex justify-center w-full mt-4">
-        <div
-            className="typing-response-container font-semibold text-black bg-slate-100 p-4 rounded-3xl w-full max-w-3xl border-black border-4"
-            style={{ minHeight: '3rem', marginBottom: '4rem' }}
-        >
-            <p className="break-words whitespace-pre-wrap">{displayedResponse}</p>
+    {showControls && (
+    <div className="flex justify-center mt-4 w-full">
+        <div className="typing-response-container font-semibold text-black bg-slate-100 p-4 rounded-3xl w-full max-w-3xl border-black border-4 overflow-y-auto max-h-64 break-words whitespace-pre-wrap custom-scrollbar"
+        style={{ minHeight: '3rem', marginBottom: '4rem' }}>
+            <p >{displayedResponse? displayedResponse:'Start interrogating the suspects by choosing them and asking them questions'}</p>
         </div>
     </div>
 )}
