@@ -4,7 +4,7 @@ from flask_cors import CORS
 import os
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
-CORS(app, origins=["https://murder-mystery-sigma.vercel.app/home"])
+CORS(app)  # Allow Cross-Origin Requests
 
 
 genai.configure(api_key="AIzaSyAwlicZmh1pzlW62YZgptoWwJEVXZxvC_0")
@@ -95,8 +95,8 @@ def static_files(path):
 @app.route('/<path:path>')
 def catch_all(path):
     return render_template('index.html')
-# Define routes
 
+# Define routes
 @app.route('/ask_character', methods=['POST'])
 def ask_character():
     data = request.json
