@@ -17,6 +17,7 @@ const Home = () => {
     const [chosenKiller, setChosenKiller] = useState(''); // Store chosen killer
     const [showControls, setShowControls] = useState(true); // Track visibility of controls
     const [isPlaying, setIsPlaying] = useState(true);
+    const [isLoading, setIsLoading] = useState(false); // Loading state for location change
     const audioRef = useRef(new Audio(Music));
 
     useEffect(() => {
@@ -35,14 +36,20 @@ const Home = () => {
 
     const locations = ['garden', 'diningRoom', 'kitchen', 'study', 'basement', 'balcony'];
     const navigate = useNavigate();
+
     const changeLocation = (newLocation) => {
-        setLocation(newLocation);
-    };
+      setTimeout(() => {
+        setLocation(newLocation);  // Change location after 5 ms delay
+    }, 1000);  // Update location immediately to change the background
+      setIsLoading(true);        // Start loading animation
+      setTimeout(() => {
+          setIsLoading(false);   // Stop loading after animation completes
+      }, 2000); // Match this duration with the animation duration
+  };
 
     const handleSuspectClick = (suspectName) => {
         setSelectedSuspect(selectedSuspect === suspectName ? null : suspectName); // Toggle selection
     };
-
     const openModal = () => {
         setIsModalOpen(true);
     };
@@ -119,28 +126,37 @@ const Home = () => {
     }, [response]);
 
     return (
-        <>
-            <div className="relative z-0 bg-primary min-h-screen bg-hero-pattern bg-cover bg-no-repeat bg-center">
-                {/* Navbar */}
-                <nav className="z-1000 bg-gray-800 text-white p-4 sticky">
-                    <div className="flex justify-between items-center">
-                        <div className="text-xl font-bold">Murder Mystery</div>
-                        <ul className="flex space-x-4">
-                            {locations.map((loc) => (
-                                <li key={loc}>
-                                    <Link
-                                        to="#"
-                                        onClick={() => changeLocation(loc)}
-                                        className={`px-3 py-2 rounded-md ${location === loc ? 'text-red-700 font-bold' : 'hover:bg-gray-600'}`}
-                                    >
-                                        {loc.charAt(0).toUpperCase() + loc.slice(1)}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </nav>
-
+      <>
+          <div className={`relative z-0 min-h-screen bg-${location} bg-cover bg-no-repeat bg-center`}>
+          {/* Loading Overlay */}
+          {isLoading && (
+            <motion.div
+              initial={{ x: '-100%' }}     // Start off-screen on the left
+              animate={{ x: ['-100%','0%','100%'] }}        // Slide in to fully cover the screen
+              exit={{ x: '-100%' }}        // Slide back out to the left
+              transition={{ duration: 2, ease: 'easeInOut' }}
+              className="fixed inset-0 bg-sky-900 z-50"
+            />
+          )}
+              {/* Navbar */}
+              <nav className="z-100 bg-gray-800 text-white p-4 sticky">
+                  <div className="flex justify-between items-center">
+                      <div className="text-xl font-bold">Murder Mystery</div>
+                      <ul className="flex space-x-4">
+                          {locations.map((loc) => (
+                              <li key={loc}>
+                                  <Link
+                                      to="#"
+                                      onClick={() => changeLocation(loc)}
+                                      className={`px-3 py-2 rounded-md ${location === loc ? 'text-red-700 font-bold' : 'hover:bg-gray-600'}`}
+                                  >
+                                      {loc.charAt(0).toUpperCase() + loc.slice(1)}
+                                  </Link>
+                              </li>
+                          ))}
+                      </ul>
+                  </div>
+              </nav>
                 {/* Toggle Button */}
                 <div className="fixed top-20 right-8">
                     <button
