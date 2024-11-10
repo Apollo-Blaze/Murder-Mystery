@@ -3,6 +3,9 @@
   text-align: center;
   height: 100%;
 }
+body{
+  background-color: rgb(31, 43, 54);
+}
 
 .suspect-card {
   transition: transform 0.3s ease-in-out;

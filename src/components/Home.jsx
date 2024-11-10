@@ -128,7 +128,7 @@ const Home = () => {
 
     return (
       <>
-          <div className={`relative z-0 min-h-screen bg-${location} bg-cover bg-no-repeat bg-center`}>
+          <div className={`relative z-0 min-h-screen bg-${location} bg-yellow-100 bg-cover bg-no-repeat bg-center`}>
           {/* Loading Overlay */}
           {isLoading && (
             <motion.div
