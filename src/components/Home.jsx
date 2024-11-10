@@ -255,7 +255,7 @@ const Home = () => {
                 {/* Play Music Button */}
                 <button
                     onClick={togglePlayPause}
-                    className="fixed bottom-8 right-8 bg-gray-800 text-white p-4 rounded-full shadow-md focus:outline-none hover:bg-gray-700"
+                    className="fixed bottom-8 right-8 bg-gray-800 text-white p-4 rounded-xl shadow-md focus:outline-none opacity-70 hover:opacity-95"
                 >
                     {isPlaying ? '🎧' : '🔇'}
                 </button>
