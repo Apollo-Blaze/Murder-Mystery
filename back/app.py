@@ -4,7 +4,7 @@ from flask_cors import CORS
 import os
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
-CORS(app)  # Allow Cross-Origin Requests
+CORS(app, origins=["https://murder-mystery-sigma.vercel.app/home"])
 
 
 genai.configure(api_key="AIzaSyAwlicZmh1pzlW62YZgptoWwJEVXZxvC_0")
