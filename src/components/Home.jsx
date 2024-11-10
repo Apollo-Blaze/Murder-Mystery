@@ -169,7 +169,7 @@ const Home = () => {
                 </div>
 
 {/* Main Content */}
-<div className={`min-h-full ${location} bg-hero-pattern bg-repeat bg-center flex flex-col items-center justify-start pt-10`}>
+<div className={`min-h-full bg-${location} bg-hero-pattern bg-repeat bg-center flex flex-col items-center justify-start pt-10`}>
     {/* Character Selection and Controls */}
     {showControls && (
         <>
@@ -219,11 +219,7 @@ const Home = () => {
         </div>
     </div>
 )}
-
-
 </div>
-
-
                 {/* Modal for Killer Choice */}
                 {isModalOpen && (
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">

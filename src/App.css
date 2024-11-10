@@ -29,24 +29,47 @@ body{
   overflow: hidden;
 }
 
-.garden {
+.bg-garden {
   height:fit-content; 
   background-image: url('./assets/mansion.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
 }
-.diningRoom,
-.kitchen,
-.study,
-.balcony,
-.basement {
-  height: fit-content; /* Allow the height to grow based on content */
+.bg-diningRoom{
+  height:fit-content; 
+  background-image: url('./assets/diningRoom.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  min-height: 100vh; /* Optional: keeps the background fixed */
+}
+.bg-kitchen{
+  height:fit-content; 
+  background-image: url('./assets/kitchen.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.bg-study{
+  height:fit-content; 
+  background-image: url('./assets/study.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.bg-balcony{
+  height:fit-content; 
+  background-image: url('./assets/balcony.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.bg-basement {
+  height:fit-content; 
+  background-image: url('./assets/basement.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 .logo {
   height: 6em;
