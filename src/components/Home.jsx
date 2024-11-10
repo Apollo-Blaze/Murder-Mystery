@@ -136,7 +136,7 @@ const Home = () => {
               animate={{ x: ['-100%','0%','100%'] }}        // Slide in to fully cover the screen
               exit={{ x: '-100%' }}        // Slide back out to the left
               transition={{ duration: 2, ease: 'easeInOut' }}
-              className="fixed inset-0 bg-sky-900 z-50"
+              className="fixed inset-0 bg-sky-950 z-50"
             />
           )}
               {/* Navbar */}
@@ -168,52 +168,63 @@ const Home = () => {
                     </button>
                 </div>
 
-                {/* Content */}
-                <div className={`min-h-full ${location} bg-hero-pattern bg-cover bg-no-repeat bg-center flex flex-col items-center justify-center`}>
-                    {showControls && (
-                        <>
-                            <div
-                                className="flex gap-16 mb-6 justify-center px-10 py-8 w-fit rounded-3xl"
-                                style={{
-                                    backgroundColor: 'rgba(72, 72, 92, 0.8)',
-                                }}
-                            >
-                                {['Alice', 'Bob', 'Clara'].map((suspect) => (
-                                    <Suspect
-                                        key={suspect}
-                                        name={suspect}
-                                        onClick={handleSuspectClick}
-                                        selected={selectedSuspect === suspect}
-                                    />
-                                ))}
-                            </div>
-                            <div className="inline-flex gap-4 bg-gray-800 px-8 py-8 justify-center rounded-3xl ">
-                                <input
-                                    type="text"
-                                    value={userInput}
-                                    onChange={handleUserInputChange}
-                                    placeholder="Interrogate the suspect..."
-                                    className="px-4 py-2 border rounded-md text-white min-w-96"
-                                />
-                                <ActionButton onClick={handleSubmitInput} text="Interrogate" />
-                                <button
-                                    onClick={openModal}
-                                    disabled={killerChosen}
-                                    className={`px-4 py-2 rounded-md ${killerChosen ? 'bg-gray-500' : 'bg-red-500 hover:bg-red-600 text-white'}`}
-                                >
-                                    Choose Killer
-                                </button>
-                            </div>
+{/* Main Content */}
+<div className={`min-h-full ${location} bg-hero-pattern bg-repeat bg-center flex flex-col items-center justify-start pt-10`}>
+    {/* Character Selection and Controls */}
+    {showControls && (
+        <>
+            <div
+                className="flex gap-16 mb-6 justify-center px-10 py-8 w-fit rounded-3xl"
+                style={{
+                    backgroundColor: 'rgba(72, 72, 92, 0.8)',
+                }}
+            >
+                {['Alice', 'Bob', 'Clara'].map((suspect) => (
+                    <Suspect
+                        key={suspect}
+                        name={suspect}
+                        onClick={handleSuspectClick}
+                        selected={selectedSuspect === suspect}
+                    />
+                ))}
+            </div>
 
-                            {/* Typing Effect Response */}
-                            {displayedResponse && (
-                                <div className="typing-response-container font-semibold text-black mt-4 bg-slate-100 p-4 rounded-3xl w-full max-w-3xl border-black border-4">
-                                    <p>{displayedResponse}</p>
-                                </div>
-                            )}
-                        </>
-                    )}
-                </div>
+            {/* Input and Action Buttons */}
+            <div className="inline-flex gap-4 bg-gray-800 px-8 py-8 justify-center rounded-3xl">
+                <input
+                    type="text"
+                    value={userInput}
+                    onChange={handleUserInputChange}
+                    placeholder="Interrogate the suspect..."
+                    className="px-4 py-2 border rounded-md text-white min-w-96"
+                />
+                <ActionButton onClick={handleSubmitInput} text="Interrogate" />
+                <button
+                    onClick={openModal}
+                    disabled={killerChosen}
+                    className={`px-4 py-2 rounded-md ${killerChosen ? 'bg-gray-500' : 'bg-red-500 hover:bg-red-600 text-white'}`}
+                >
+                    Choose Killer
+                </button>
+            </div>
+        </>
+    )}
+
+    {/* Typing Effect Response, Positioned Below */}
+    {showControls && displayedResponse && (
+    <div className="flex justify-center w-full mt-4">
+        <div
+            className="typing-response-container font-semibold text-black bg-slate-100 p-4 rounded-3xl w-full max-w-3xl border-black border-4"
+            style={{ minHeight: '3rem', marginBottom: '4rem' }}
+        >
+            <p className="break-words whitespace-pre-wrap">{displayedResponse}</p>
+        </div>
+    </div>
+)}
+
+
+</div>
+
 
                 {/* Modal for Killer Choice */}
                 {isModalOpen && (
@@ -244,13 +255,12 @@ const Home = () => {
                                 Cancel
                             </button>
                         </div>
+                        
                     </div>
                 )}
 
                 {/* Footer */}
-                <div className="absolute bottom-4 w-full text-center text-white">
-        <p className="text-sm opacity-75">Developed by Apollo Blaze.</p>
-      </div>
+
 
                 {/* Play Music Button */}
                 <button

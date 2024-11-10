@@ -3,6 +3,7 @@
   text-align: center;
   height: 100%;
 }
+
 .suspect-card {
   transition: transform 0.3s ease-in-out;
 }
@@ -26,42 +27,42 @@
 }
 
 .garden {
-  height: 100vh; 
+  height: 120vh; 
   background-image: url('./assets/mansion.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
 }
 .diningRoom {
-  height: 100vh; 
+  height: 120vh; 
   background-image: url('./assets/diningRoom.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
 }
 .kitchen {
-  height: 100vh; 
+  height: 120vh; 
   background-image: url('./assets/kitchen.jpg');
   background-size:cover;
   background-position: center center;
   background-repeat: no-repeat;
 }
 .study {
-  height: 100vh; 
+  height: 120vh; 
   background-image: url('./assets/study.jpg');
   background-size:cover;
   background-position: center center;
   background-repeat: no-repeat;
 }
 .balcony {
-  height: 100vh; 
+  height: 120vh; 
   background-image: url('./assets/balcony.jpg');
   background-size:cover;
   background-position: center center;
   background-repeat: no-repeat;
 }
 .basement {
-  height: 100vh; 
+  height: 120vh; 
   background-image: url('./assets/basement.jpg');
   background-size:cover;
   background-position: center center;
@@ -104,14 +105,13 @@
 }
 
 .typing-response-container {
+  height: fit-content;
   overflow-wrap: break-word;
   word-wrap: break-word;
   white-space: normal; /* Allows the text to wrap normally */
-  overflow-x: hidden; /* Prevents horizontal overflow */
+ /* Prevents horizontal overflow */
 }
-.typing-response-container {
-  overflow-x: auto;
-}
+
 /* Hide the scrollbar but keep the scroll functionality */
 .custom-scrollbar::-webkit-scrollbar {
   display: none; /* Hide the scrollbar */
