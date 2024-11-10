@@ -191,13 +191,18 @@ const Home = () => {
 
             {/* Input and Action Buttons */}
             <div className="inline-flex gap-4 bg-gray-800 px-8 py-8 justify-center rounded-3xl">
-                <input
-                    type="text"
-                    value={userInput}
-                    onChange={handleUserInputChange}
-                    placeholder="Interrogate the suspect..."
-                    className="px-4 py-2 border rounded-md text-white min-w-96"
-                />
+            <input
+                type="text"
+                value={userInput}
+                onChange={handleUserInputChange}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                        handleSubmitInput();
+                    }
+                }}
+                placeholder="Interrogate the suspect..."
+                className="px-4 py-2 border rounded-md text-white min-w-96"
+            />
                 <ActionButton onClick={handleSubmitInput} text="Interrogate" />
                 <button
                     onClick={openModal}
