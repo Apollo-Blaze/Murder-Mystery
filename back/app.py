@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify,send_from_directory
 import google.generativeai as genai
 from flask_cors import CORS
 import os
 
-app = Flask(__name__, static_folder='static', static_url_path='/static')
+app = Flask(__name__, static_folder="static", template_folder="templates")
 CORS(app)  # Allow Cross-Origin Requests
 
 # Set up API key for genai
@@ -88,10 +88,14 @@ suspect_models = {
     }
 }
 
-# Define routes
-@app.route('/')
-def home():
-    return render_template('index.html')  # Make sure index.html exists in the templates folder
+@app.route('/static/<path:path>')
+def static_files(path):
+    return send_from_directory('static', path)
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template('index.html')
 
 @app.route('/choose_killer', methods=['POST'])
 def choose_killer():
