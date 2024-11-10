@@ -22,6 +22,7 @@ const Home = () => {
 
     useEffect(() => {
         audioRef.current.play();
+        audioRef.current.loop = true; 
         setIsPlaying(true);
     }, []);
 
