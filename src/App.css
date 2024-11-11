@@ -1,10 +1,90 @@
+/* Ensure full height for root and body */
+html, body {
+  height: 100%; /* Full height for body and html elements */
+  margin: 0;
+  background-color: rgb(31, 43, 54); 
+  /* Body background color */
+}
+
 #root {
   margin: 0 auto;
   text-align: center;
-  height: 100%;
+  height: 100%; /* Full height for root */
 }
-body{
-  background-color: rgb(31, 43, 54);
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden; /* Prevent the container from overflowing */
+}
+
+.bg-garden{
+  background-image: url('./assets/garden.jpg');
+  height: 100%; /* Ensure the background image takes up full height */
+  min-height: 100vh; /* Ensure the container doesn't shrink */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow-y: auto; /* Allow scrolling inside these containers */
+} .bg-diningRoom{
+  background-image: url('./assets/diningRoom.jpg');
+  height: 100%; /* Ensure the background image takes up full height */
+  min-height: 100vh; /* Ensure the container doesn't shrink */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow-y: auto; /* Allow scrolling inside these containers */
+} .bg-kitchen{
+  background-image: url('./assets/kitchen.jpg');
+  height: 100%; /* Ensure the background image takes up full height */
+  min-height: 100vh; /* Ensure the container doesn't shrink */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow-y: auto; /* Allow scrolling inside these containers */
+} .bg-study{
+  background-image: url('./assets/study.jpg');
+  height: 100%; /* Ensure the background image takes up full height */
+  min-height: 100vh; /* Ensure the container doesn't shrink */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow-y: auto; /* Allow scrolling inside these containers */
+} .bg-balcony{
+  background-image: url('./assets/balcony.jpg');
+  height: 100%; /* Ensure the background image takes up full height */
+  min-height: 100vh; /* Ensure the container doesn't shrink */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow-y: auto; /* Allow scrolling inside these containers */
+} .bg-basement {
+  background-image: url('./assets/basement.jpg');
+  height: 100%; /* Ensure the background image takes up full height */
+  min-height: 100vh; /* Ensure the container doesn't shrink */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow-y: auto; /* Allow scrolling inside these containers */
+}
+.bg-garden::-webkit-scrollbar,
+.bg-diningRoom::-webkit-scrollbar,
+.bg-kitchen::-webkit-scrollbar,
+.bg-study::-webkit-scrollbar,
+.bg-balcony::-webkit-scrollbar,
+.bg-basement::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar */
+}
+
+.bg-garden,
+.bg-diningRoom,
+.bg-kitchen,
+.bg-study,
+.bg-balcony,
+.bg-basement {
+  -ms-overflow-style: none;  /* For Internet Explorer 10+ */
+  scrollbar-width: none;      /* For Firefox */
 }
 
 .suspect-card {
@@ -18,68 +98,23 @@ body{
 }
 
 .suspect-image {
-  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure image maintains aspect ratio and covers container */
   border-radius: 12px;
 }
 
-.app-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.bg-garden {
-  height:fit-content; 
-  background-image: url('./assets/mansion.jpg');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-.bg-diningRoom{
-  height:fit-content; 
-  background-image: url('./assets/diningRoom.jpg');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-.bg-kitchen{
-  height:fit-content; 
-  background-image: url('./assets/kitchen.jpg');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-.bg-study{
-  height:fit-content; 
-  background-image: url('./assets/study.jpg');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-.bg-balcony{
-  height:fit-content; 
-  background-image: url('./assets/balcony.jpg');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-.bg-basement {
-  height:fit-content; 
-  background-image: url('./assets/basement.jpg');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-}
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -107,12 +142,13 @@ body{
   color: #888;
 }
 
+/* Typing response container: keeps text from overflowing */
 .typing-response-container {
-  height: fit-content;
   overflow-wrap: break-word;
   word-wrap: break-word;
   white-space: normal; /* Allows the text to wrap normally */
- /* Prevents horizontal overflow */
+  max-height: 90vh; /* Limit max height */
+  overflow-y: auto; /* Enable vertical scrolling if needed */
 }
 
 /* Hide the scrollbar but keep the scroll functionality */
@@ -123,4 +159,35 @@ body{
 .custom-scrollbar {
   -ms-overflow-style: none;  /* For Internet Explorer 10+ */
   scrollbar-width: none;      /* For Firefox */
+}
+
+/* Style for input container */
+.inline-flex {
+  display: inline-flex;
+  gap: 1rem;
+  background-color: #2d3748; /* Dark background for the input container */
+  padding: 1rem 2rem;
+  border-radius: 1.5rem;
+  width: 100%; /* Ensure the container takes up full width */
+  box-sizing: border-box; /* Prevent overflow by adjusting width */
+}
+
+/* Style for ActionButton */
+button, .ActionButton {
+  padding: 0.5rem 1rem;
+  background-color: #ef4444; /* Red background for action buttons */
+  color: white;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover, .ActionButton:hover {
+  background-color: #dc2626; /* Darker red on hover */
+}
+
+/* Style for choose killer button */
+button:disabled {
+  background-color: #6b7280; /* Disabled button color */
+  cursor: not-allowed;
 }

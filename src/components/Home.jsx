@@ -19,6 +19,7 @@ const Home = () => {
     const [isPlaying, setIsPlaying] = useState(true);
     const [isLoading, setIsLoading] = useState(false); // Loading state for location change
     const audioRef = useRef(new Audio(Music));
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     useEffect(() => {
         audioRef.current.play();
@@ -127,106 +128,130 @@ const Home = () => {
     }, [response]);
 
     return (
-      <>
-          <div className={`relative z-0 bg-${location} bg-cover min-h-fit bg-center`}>
-          {/* Loading Overlay */}
-          {isLoading && (
-            <motion.div
-              initial={{ x: '-100%' }}     // Start off-screen on the left
-              animate={{ x: ['-100%','0%','100%'] }}        // Slide in to fully cover the screen
-              exit={{ x: '-100%' }}        // Slide back out to the left
-              transition={{ duration: 2, ease: 'easeInOut' }}
-              className="fixed inset-0 bg-sky-950 z-50"
-            />
-          )}
-              {/* Navbar */}
-              <nav className="z-100 bg-gray-800 text-white p-4 sticky">
-                  <div className="flex justify-between items-center">
-                      <div className="text-2xl font-bold ">Ravenswood Murder</div>
-                      <ul className="flex space-x-4">
-                          {locations.map((loc) => (
-                              <li key={loc}>
+        <>
+         {/* Navbar */}
+         {!isLoading &&(<nav className="z-100 bg-gray-800 text-white p-4 fixed z-40 w-full ">
+                    <div className="flex justify-between items-center">
+                        <div className="text-2xl font-bold">Ravenswood Murder</div>
+
+                        {/* Desktop Menu */}
+                        <ul className="hidden sm:flex space-x-4">
+                            {locations.map((loc) => (
+                                <li key={loc}>
+                                    <Link
+                                        to="#"
+                                        onClick={() => changeLocation(loc)}
+                                        className={`px-3 py-2 rounded-md transition-all duration-200 ${
+                                            location === loc ? 'text-red-700 font-bold' : 'hover:text-gray-300 '
+                                        }`}
+                                    >
+                                        {loc.charAt(0).toUpperCase() + loc.slice(1)}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+
+                        {/* Mobile Menu Toggle */}
+                        <button
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            className="sm:hidden text-2xl bg-transparent"
+                        >
+                            ☰
+                        </button>
+                    </div>
+
+                    {/* Mobile Menu */}
+                    {isMobileMenuOpen && (
+                        <div className="sm:hidden bg-gray-800 p-2">
+                            {locations.map((loc) => (
                                 <Link
+                                    key={loc}
                                     to="#"
-                                    onClick={() => changeLocation(loc)}
-                                    className={`px-3 py-2 rounded-md transition-all duration-200 ${
-                                        location === loc ? 'text-red-700 font-bold' : 'hover:text-gray-300 '
-                                    }`}
+                                    onClick={() => {
+                                        changeLocation(loc);
+                                        setIsMobileMenuOpen(false);
+                                    }}
+                                    className="block px-3 py-2 rounded-md transition-all duration-200 hover:bg-gray-700"
                                 >
                                     {loc.charAt(0).toUpperCase() + loc.slice(1)}
                                 </Link>
-                              </li>
-                          ))}
-                      </ul>
-                  </div>
-              </nav>
-                {/* Toggle Button */}
-                <div className="fixed top-20 right-8">
-                    <button
-                        onClick={() => setShowControls(!showControls)}
-                        className="px-4 py-2 bg-blue-500 bg-opacity-60 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
-                    >
-                        {showControls ? 'Hide Controls' : 'Show Controls'}
-                    </button>
+                            ))}
+                        </div>
+                    )}
+                </nav>)}
+                
+
+            <div className={`relative z-0 bg-${location} bg-cover min-h-fit bg-center px-4`}>
+                {isLoading && (
+                    <motion.div
+                        initial={{ x: '-100%' }}
+                        animate={{ x: ['-100%', '0%', '100%'] }}
+                        transition={{ duration: 2, ease: 'easeInOut' }}
+                        className="fixed inset-0 bg-sky-950 z-50"
+                    />
+                )}
+
+               
+
+                
+
+                {/* Main Content */}
+                <div className={`min-h-full bg-${location} bg-hero-pattern bg-repeat bg-center flex flex-col items-center justify-start pt-10 `}>
+                    {/* Character Selection and Controls */}
+                    {showControls && (
+                        <>
+                            <div className="flex flex-col sm:flex-row gap-4 mb-6 px-8 py-4 w-fit rounded-3xl mt-12 sm:mt-0 md:mt-10 md:px-10 md:py-8"
+                                style={{ backgroundColor: 'rgba(72, 72, 92, 0.8)' }}
+                            >
+                                {['Alice', 'Bob', 'Clara'].map((suspect) => (
+                                    <Suspect
+                                        key={suspect}
+                                        name={suspect}
+                                        onClick={handleSuspectClick}
+                                        selected={selectedSuspect === suspect}
+                                    />
+                                ))}
+                            </div>
+
+                            {/* Input and Action Buttons */}
+                            <div className="flex flex-col items-center justify-center bg-gray-800 px-6 py-6 md:px-10 md:py-10 rounded-xl max-w-full max-h-fit">
+                                <div className="flex flex-wrap items-center gap-4 w-full max-w-2xl">
+                                    <input
+                                        type="text"
+                                        value={userInput}
+                                        onChange={handleUserInputChange}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter') handleSubmitInput();
+                                        }}
+                                        placeholder="Interrogate the suspect..."
+                                        className="flex-grow px-4 py-2 border rounded-md text-white bg-gray-700 placeholder-gray-400 focus:outline-none w-full sm:w-auto"
+                                    />
+                                    <ActionButton onClick={handleSubmitInput} text="Interrogate" />
+                                    <button
+                                        onClick={openModal}
+                                        disabled={killerChosen}
+                                        className={`px-4 py-2 rounded-md ${killerChosen ? 'bg-gray-500 cursor-not-allowed' : 'bg-red-500 hover:bg-red-600 text-white'}`}
+                                    >
+                                        Choose Killer
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </>
+                    )}
+
+                    {/* Typing Effect Response */}
+                    {showControls && (<div className="flex justify-center mt-4 w-full">
+                        <div
+                            className="typing-response-container font-semibold text-black bg-slate-100 p-4 rounded-3xl w-full max-w-3xl border-black border-4 overflow-y-auto max-h-64 break-words whitespace-pre-wrap custom-scrollbar"
+                            style={{ minHeight: '3rem', marginBottom: '4rem' }}
+                        >
+                            <p>{displayedResponse || 'Start interrogating the suspects...'}</p>
+                        </div>
+                    </div>)}
                 </div>
 
-{/* Main Content */}
-<div className={`min-h-full bg-${location} bg-hero-pattern bg-repeat bg-center flex flex-col items-center justify-start pt-10`}>
-    {/* Character Selection and Controls */}
-    {showControls && (
-        <>
-            <div
-                className="flex gap-16 mb-6 justify-center px-10 py-8 w-fit rounded-3xl"
-                style={{
-                    backgroundColor: 'rgba(72, 72, 92, 0.8)',
-                }}
-            >
-                {['Alice', 'Bob', 'Clara'].map((suspect) => (
-                    <Suspect
-                        key={suspect}
-                        name={suspect}
-                        onClick={handleSuspectClick}
-                        selected={selectedSuspect === suspect}
-                    />
-                ))}
-            </div>
-
-            {/* Input and Action Buttons */}
-            <div className="inline-flex gap-4 bg-gray-800 px-8 py-8 justify-center rounded-3xl">
-            <input
-                type="text"
-                value={userInput}
-                onChange={handleUserInputChange}
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                        handleSubmitInput();
-                    }
-                }}
-                placeholder="Interrogate the suspect..."
-                className="px-4 py-2 border rounded-md text-white min-w-96"
-            />
-                <ActionButton onClick={handleSubmitInput} text="Interrogate" />
-                <button
-                    onClick={openModal}
-                    disabled={killerChosen}
-                    className={`px-4 py-2 rounded-md ${killerChosen ? 'bg-gray-500' : 'bg-red-500 hover:bg-red-600 text-white'}`}
-                >
-                    Choose Killer
-                </button>
-            </div>
-        </>
-    )}
-
-    {/* Typing Effect Response, Positioned Below */}
-    {showControls && (
-    <div className="flex justify-center mt-4 w-full">
-        <div className="typing-response-container font-semibold text-black bg-slate-100 p-4 rounded-3xl w-full max-w-3xl border-black border-4 overflow-y-auto max-h-64 break-words whitespace-pre-wrap custom-scrollbar"
-        style={{ minHeight: '3rem', marginBottom: '4rem' }}>
-            <p >{displayedResponse? displayedResponse:'Start interrogating the suspects by choosing them and asking them questions'}</p>
-        </div>
-    </div>
-)}
-</div>
                 {/* Modal for Killer Choice */}
                 {isModalOpen && (
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -237,34 +262,26 @@ const Home = () => {
                                     <button
                                         key={suspect}
                                         onClick={() => handleKillerChoice(suspect)}
-                                        
-                                        className={`px-4 py-2 rounded-md ${!(chosenKiller===suspect)? 'hover:bg-gray-900':''} ${chosenKiller === suspect ? 'bg-red-500 text-white' : ''}`}
+                                        className={`px-4 py-2 rounded-md ${chosenKiller === suspect ? 'bg-red-500 text-white' : 'hover:bg-gray-900'}`}
                                     >
                                         {suspect}
                                     </button>
                                 ))}
                             </div>
-                            <button
-                                onClick={submitKillerChoice}
-                                className="px-6 py-2 bg-green-500 text-white rounded-md"
-                            >
-                                Submit
-                            </button>
-                            <button
-                                onClick={closeModal}
-                                className="ml-4 px-6 py-2 bg-gray-300 text-black rounded-md"
-                            >
-                                Cancel
-                            </button>
+                            <button onClick={submitKillerChoice} className="px-6 py-2 bg-green-500 text-white rounded-md">Submit</button>
+                            <button onClick={closeModal} className="ml-4 px-6 py-2 bg-gray-300 text-black rounded-md">Cancel</button>
                         </div>
-                        
                     </div>
                 )}
-
-                {/* Footer */}
-
-
-                {/* Play Music Button */}
+                {/* Toggle Button */}
+                {!isMobileMenuOpen && (<div className="fixed top-24 right-4 sm:top-20 sm:right-8 z-40">
+                    <button
+                        onClick={() => setShowControls(!showControls)}
+                        className="px-4 py-2 bg-blue-500 bg-opacity-60 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
+                    >
+                        {showControls ? 'Hide Controls' : 'Show Controls'}
+                    </button>
+                </div>)}
                 <button
                     onClick={togglePlayPause}
                     className="fixed bottom-8 right-8 bg-gray-800 text-white p-4 rounded-xl shadow-md focus:outline-none opacity-70 hover:opacity-95"
@@ -277,4 +294,3 @@ const Home = () => {
 };
 
 export default Home;
-

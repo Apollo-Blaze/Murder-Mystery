@@ -26,7 +26,7 @@ const Suspect = ({ name, onClick, selected }) => {
       <img 
         src={suspectImages[name]} 
         alt={name} 
-        className="relative object-cover self-end" 
+        className="relative object-cover self-end z-0" 
       />
     </motion.div>
   );
