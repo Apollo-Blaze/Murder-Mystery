@@ -1,78 +1,118 @@
-# 🕵️ Murder Mystery Interactive Experience
+# Ravenswood Murder Mystery
 
-Welcome to the **Murder Mystery Interactive Experience**! This project immerses users in an interactive murder mystery investigation, where they must explore different locations, interrogate suspects, and solve the mystery by determining the killer.
+Welcome to the **Ravenswood Murder Mystery Interactive Experience**! Immerse yourself in a captivating mystery investigation, where you explore different locations, interrogate suspects, and use clues to ultimately identify the killer. The game is designed to provide an interactive and dynamic gameplay experience, enhanced with new features such as a notepad, loading screens, and the ability to unlock clues from the chat history.
+
+---
 
 ## 🕵️ Project Overview
 
-The **Murder Mystery Interactive Experience** allows users to:
+The goal of this project is to create an immersive and interactive murder mystery experience where users can:
 
-- **Explore various locations** (e.g., dining room, kitchen, garden, study, basement, balcony).
-- **Interact with suspects**, each having unique backgrounds, alibis, and clues that contribute to the mystery.
-- **Solve the mystery** by gathering evidence and using deductive reasoning to choose the killer.
+- **Navigate through different locations** (e.g., dining room, kitchen, garden) to gather clues.
+- **Interact with suspects**, each with unique backgrounds, alibis, and motives.
+- **Use clues from a dynamic notepad** to help solve the mystery and choose the killer.
+- **Engage in conversations with suspects** powered by a Python-based NLP chatbot, which helps uncover hidden information and secrets.
 
-This interactive experience leverages both frontend and backend technologies to create an engaging, immersive game.
+### New Features:
+- **Notepad**: A handy tool that keeps track of clues discovered throughout the game.
+- **Loading Screens**: Smooth transitions with loading indicators, adding suspense and enhancing the experience.
+- **Unlockable Clues**: As users progress, more clues become available in the chat history, allowing them to piece together the mystery.
+- **Music**: Background music enhances the atmosphere, adding suspense during key moments.
+- **Responsiveness**: The game is fully responsive, ensuring a seamless experience on both desktop and mobile devices.
+
+---
 
 ## 🎨 Key Features
 
-- **Location Navigation**: Users can freely navigate between rooms, with each location containing important clues and details about the murder mystery. Locations change dynamically as users progress in the investigation.
-  
-- **Clickable Suspects**: Each suspect (Alice, Bob, and Clara) is represented with a detailed profile. Users can click on suspects to interrogate them and receive clues, alibis, and motives.
+### 1. **Location Navigation**:
+   - Explore various locations (e.g., dining room, kitchen, study, garden) each containing unique clues.
+   - Use **React Router** to navigate smoothly between different rooms and areas in the mansion.
 
-- **Dynamic Backgrounds**: The background of the website changes as users move between locations, providing a more immersive and interactive experience.
-  
-- **Killer Selection**: At any point, users can make a final choice about who they think the killer is. This choice will impact the ending of the story.
+### 2. **Clickable Suspects**:
+   - Click on suspects (e.g., Alice, Bob, Clara) to start an investigation.
+   - Each suspect has a **unique alibi**, **motive**, and **background story**.
+   - Investigate suspects through interactive chat with a bot powered by Python’s **NLTK and Keras**.
 
-- **Interactive Chatbot**: The Python-powered NLP chatbot provides context-sensitive responses, guiding users through the investigation. The chatbot responds to questions related to the case and interacts with users based on their progress.
+### 3. **Chatbot Interaction**:
+   - Ask suspects questions and receive responses that reveal important clues.
+   - Use the chatbot to unlock secrets, uncover hidden motivations, and piece together alibis.
+   - All chat interactions are saved, allowing you to track your investigation progress.
 
-- **Responsive Layout**: The project is built with **Tailwind CSS** to ensure a responsive and adaptive layout that works seamlessly across devices, enhancing the user experience.
+### 4. **Notepad**:
+   - Keep track of discovered clues with a **dynamic notepad**.
+   - As users uncover new information, clues are added to the notepad, and the player can access them anytime during their investigation.
+   - Clues are linked to specific locations or suspects, aiding in the process of identifying the killer.
+
+### 5. **Unlockable Clues**:
+   - Clues become unlocked progressively as the user interrogates suspects and explores locations.
+   - Unlock hidden details about suspects and rooms to form connections and narrow down the potential killer.
+
+### 6. **Choosing the Killer**:
+   - After gathering enough clues, users can make a **one-time decision** on who they believe is the killer.
+   - Make your choice and solve the mystery based on all the gathered evidence.
+
+### 7. **Music & Sound**:
+   - Background music plays during key moments to enhance the atmosphere.
+   - Music dynamically adjusts to match the mood of the investigation, building suspense as you move through the mystery.
+
+---
 
 ## 🛠️ Tools and Technologies Used
 
 ### Frontend:
-
-- **React**: The frontend is built using React to create a dynamic user interface and manage the interactive components.
-  
-- **Tailwind CSS**: Utilized for styling, responsive layouts, and creating visually appealing UI elements.
-  
-- **React Router**: Used to manage navigation between different locations and scenes in the mystery, creating a seamless transition between pages.
-
-- **JavaScript & JSX**: Implemented to handle user interactions, render dynamic content, and manage state transitions.
-  
-- **State Management**: React's built-in state management is used for tracking user progress, collected clues, and suspect interactions.
+- **React**: For building the user interface and managing the interactive features.
+- **Tailwind CSS**: To style the components, implement a responsive layout, and create an immersive theme.
+- **React Router**: For navigation between different locations and suspects.
+- **JavaScript & JSX**: Used to handle dynamic content and manage user interactions.
 
 ### Backend:
+- **Python**: A Python file uses **Natural Language Processing (NLP)** to power a chatbot that responds to user interactions, providing clues and alibi details.
+- **Flask/Django**: Can be used to handle backend requests and serve the chatbot responses.
 
-- **Python (NLP Chatbot)**: The backend is powered by a Python script using **Natural Language Processing (NLP)** to interpret and respond to user queries related to suspects, locations, and alibis.
+### New Features:
+- **Notepad System**: A feature to dynamically display and save clues discovered by the user.
+- **Loading States**: Animated loading screens that provide a seamless transition between scenes and maintain user engagement.
+- **Responsiveness**: Fully responsive design using Tailwind CSS, ensuring compatibility across devices.
 
-- **NLTK**: Used for text processing and natural language understanding, allowing the chatbot to interpret user input and provide relevant clues.
-  
-- **Keras**: Implemented for deeper chatbot understanding and interaction modeling, making the system more robust and intelligent.
-
-- **Flask**: Flask serves as the backend framework, handling API calls and interacting with the chatbot to provide responses to the frontend.
-
-### Additional Features:
-
-- **Interactive Buttons and Options**: Users can click on various buttons and options that trigger different chatbot intents, guiding them through the investigation.
-
-- **One-time Killer Choice**: The user can make their final decision on the killer at a crucial moment in the game, which will influence the outcome.
+---
 
 ## 🌐 How It Works
 
-1. **Location Navigation**: When users start the game, they begin in the default location (such as the **dining room**) and can navigate through different locations like the **kitchen**, **garden**, **study**, **basement**, and **balcony**. Each room provides unique clues and interactions.
+1. **User Navigation**:
+   - Users begin the game in a default location (e.g., the main hall).
+   - They can use a menu bar styled with a **dark purple, slightly transparent background** to navigate to different rooms.
+   - Each room contains important clues related to the murder.
 
-2. **Suspect Interaction**: Users can click on any of the suspects (Alice, Bob, or Clara) to open up a dialogue with the chatbot. The chatbot responds based on the selected suspect, offering information, alibis, and motives that may aid in solving the case.
+2. **Suspect Interaction**:
+   - Clicking on a suspect opens a chatbot interaction, allowing the player to ask questions about alibis, motives, and backgrounds.
+   - The chatbot reveals new information that can be added to the **notepad**.
 
-3. **Chatbot Responses**: The Python backend, powered by **Flask** and the **NLP model** (using **NLTK** and **Keras**), processes user queries and responds with relevant information, including possible alibis, motives, and answers to direct questions about the case.
+3. **Unlocking Clues**:
+   - As the investigation progresses, users unlock new clues through interactions and exploration.
+   - The chatbot responds based on the current context of the investigation, giving new details as the story evolves.
 
-4. **Choosing the Killer**: After interacting with the suspects and collecting clues, the user has the opportunity to make a **one-time decision** on who they believe the killer is. Based on this selection, the narrative of the game can change, leading to different outcomes.
+4. **Final Decision**:
+   - After gathering enough evidence, the player can choose the killer.
+   - The **chat history** and clues in the **notepad** help in making an informed decision.
+
+5. **Background Music**:
+   - Suspenseful and atmospheric background music sets the mood as players investigate.
+   - Music changes dynamically based on the current location or event.
+
+---
 
 ## 📝 Credits
 
-This project is a creative exploration of interactive storytelling, blending **frontend web development**, **natural language processing**, and **game design**. It was built using:
+This project was built as a creative exploration of interactive storytelling, combining **frontend development**, **natural language processing**, and **UI/UX design**. The goal was to create a fun, immersive experience that challenges players to solve a complex mystery.
 
-- **Frontend Technologies**: React, Tailwind CSS, React Router, and JavaScript.
-- **Backend Technologies**: Python (Flask, NLTK, Keras).
-  
-Special thanks to the open-source libraries and frameworks used to bring this project to life!
+---
+
+### 🎥 Demo
+
+Watch the interactive gameplay in action! 
 
 ![Demo of the Project](src/assets/murder.gif)
+
+---
+
+Feel free to explore, investigate, and most importantly—**solve the mystery**!
