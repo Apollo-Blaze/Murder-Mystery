@@ -13,7 +13,7 @@ const IntroPage = () => {
         <div className="flex items-center justify-center space-x-44">
           {/* Left side content (story, suspects, etc.) */}
           <div className="bg-black bg-opacity-70 p-8 rounded-3xl text-center text-white min-w-[300px] max-w-2xl max-h-[70vh] overflow-y-auto custom-scrollbar">
-            <h1 className="text-4xl font-bold mb-4">Welcome to the Murder Mystery</h1>
+            <h1 className="text-3xl font-bold mb-4">Welcome to the Ravenswood Murder</h1>
             <p className="text-lg mb-6 text-left">
               Welcome to Ravenswood Manor, where mystery and danger lurk in every shadow. Mr. Blackwood was found dead in the grand estate, and it’s up to you, the detective, to unravel the truth behind his demise. The primary suspects are Alice, his business partner; Bob, his estranged brother; and Clara, a longtime family friend.
 

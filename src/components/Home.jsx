@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import Suspect from './Suspect';
-import ActionButton from './ActionButton';
+import Suspect from './suspect';
+import ActionButton from './actionbutton';
 import '../App.css';
 import Music from '../assets/music.mp3';
 
@@ -142,17 +142,19 @@ const Home = () => {
               {/* Navbar */}
               <nav className="z-100 bg-gray-800 text-white p-4 sticky">
                   <div className="flex justify-between items-center">
-                      <div className="text-xl font-bold">Murder Mystery</div>
+                      <div className="text-2xl font-bold ">Ravenswood Murder</div>
                       <ul className="flex space-x-4">
                           {locations.map((loc) => (
                               <li key={loc}>
-                                  <Link
-                                      to="#"
-                                      onClick={() => changeLocation(loc)}
-                                      className={`px-3 py-2 rounded-md ${location === loc ? 'text-red-700 font-bold' : 'hover:bg-gray-600'}`}
-                                  >
-                                      {loc.charAt(0).toUpperCase() + loc.slice(1)}
-                                  </Link>
+                                <Link
+                                    to="#"
+                                    onClick={() => changeLocation(loc)}
+                                    className={`px-3 py-2 rounded-md transition-all duration-200 ${
+                                        location === loc ? 'text-red-700 font-bold' : 'hover:text-gray-300 '
+                                    }`}
+                                >
+                                    {loc.charAt(0).toUpperCase() + loc.slice(1)}
+                                </Link>
                               </li>
                           ))}
                       </ul>
@@ -230,12 +232,13 @@ const Home = () => {
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                         <div className="bg-gray-800 p-6 rounded-md shadow-lg">
                             <h2 className="text-xl mb-4">Choose the Killer</h2>
-                            <div className="flex gap-4 mb-6">
+                            <div className="flex gap-7 mb-6">
                                 {['Alice', 'Bob', 'Clara'].map((suspect) => (
                                     <button
                                         key={suspect}
                                         onClick={() => handleKillerChoice(suspect)}
-                                        className={`px-4 py-2 rounded-lg ${chosenKiller === suspect ? 'bg-red-500 text-white' : 'bg-blue-300'}`}
+                                        
+                                        className={`px-4 py-2 rounded-md ${!(chosenKiller===suspect)? 'hover:bg-gray-900':''} ${chosenKiller === suspect ? 'bg-red-500 text-white' : ''}`}
                                     >
                                         {suspect}
                                     </button>
@@ -274,3 +277,4 @@ const Home = () => {
 };
 
 export default Home;
+
