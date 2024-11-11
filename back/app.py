@@ -1,14 +1,19 @@
-from flask import Flask, render_template, request, jsonify,send_from_directory
+from flask import Flask, render_template, request, jsonify, send_from_directory
 import google.generativeai as genai
+from dotenv import load_dotenv
 from flask_cors import CORS
 import os
+
+# Load environment variables from .env
+load_dotenv()
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
 CORS(app)  # Allow Cross-Origin Requests
 
-
-genai.configure(api_key="AIzaSyAwlicZmh1pzlW62YZgptoWwJEVXZxvC_0")
-
+# Retrieve the API key from the environment
+gemini_api_key = os.getenv("GEMINI_API_KEY")
+# Pass the API key to configure the Google Generative AI library
+genai.configure(api_key=gemini_api_key)
 
 suspect_models = {
     "clara": {
