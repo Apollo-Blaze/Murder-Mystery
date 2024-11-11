@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Suspect from './Suspect.jsx';
 import ActionButton from './ActionButton.jsx';
 import '../App.css';
@@ -20,6 +20,16 @@ const Home = () => {
     const [isLoading, setIsLoading] = useState(false); // Loading state for location change
     const audioRef = useRef(new Audio(Music));
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [clues, setClues] = useState({
+        locket: false,
+        vase: false,
+        will: false,
+    }); // Track discovered clues
+    const [isNotepadOpen, setIsNotepadOpen] = useState(false);
+
+    const toggleNotepad = () => {
+        setIsNotepadOpen(!isNotepadOpen);
+    };
 
     useEffect(() => {
         audioRef.current.play();
@@ -98,6 +108,17 @@ const Home = () => {
                 .then((data) => {
                     setResponse(data.response.trim()); // Trim leading/trailing spaces
                     setDisplayedResponse(''); // Reset displayed response for typing effect
+
+                    // Check if the response contains any clue keywords and update the state
+                    if (data.response.includes("locket")) {
+                        setClues(prevClues => ({ ...prevClues, locket: true }));
+                    }
+                    if (data.response.includes("vase")) {
+                        setClues(prevClues => ({ ...prevClues, vase: true }));
+                    }
+                    if (data.response.includes("will")) {
+                        setClues(prevClues => ({ ...prevClues, will: true }));
+                    }
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -108,7 +129,6 @@ const Home = () => {
         }
         setUserInput("");
     };
-
     // Typing effect
     useEffect(() => {
         if (response) {
@@ -213,6 +233,56 @@ const Home = () => {
                                 ))}
                             </div>
 
+                            <button
+                                onClick={toggleNotepad}
+                                className="px-4 py-4 bg-blue-500 bg-opacity-70 text-white rounded-lg shadow-md hover:bg-red-600 transition duration-300 fixed top-36 right-4 sm:top-32 sm:right-8 z-40"
+                            >
+                                📒
+                            </button>
+
+                            {/* Notepad Modal */}
+                            <AnimatePresence>
+  {isNotepadOpen && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, ease: 'easeInOut' }}
+      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+    >
+      <motion.div
+        initial={{ x: -150 }}
+        animate={{ x: 0 }}
+        exit={{ x: 150 }}
+        transition={{ duration: 0.5, ease: 'easeInOut' }}
+        className="bg-yellow-300 text-black p-4 w-fit mt-10 text-center pr-7"
+      >
+        <h2 className="text-3xl mb-4 font-bold">Clues Discovered</h2>
+        <ul className="text-xl pl-5">
+          <li>
+            {clues.locket ? '✅ Locket' : '???'}
+            <hr className="border-gray-600 my-2" />
+          </li>
+          <li>
+            {clues.vase ? '✅ Vase (Dining Room)' : '???'}
+            <hr className="border-gray-600 my-2" />
+          </li>
+          <li>
+            {clues.will ? '✅ Will (Clara’s Room)' : '???'}
+            <hr className="border-gray-600 my-2" />
+          </li>
+        </ul>
+        <button
+          onClick={toggleNotepad}
+          className="mt-4 px-6 py-2 bg-gray-700 text-white rounded-md hover:bg-red-600"
+        >
+          Close
+        </button>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
                             {/* Input and Action Buttons */}
                             <div className="flex flex-col items-center justify-center bg-gray-800 px-6 py-6 md:px-10 md:py-10 rounded-xl max-w-full max-h-fit">
                                 <div className="flex flex-wrap items-center gap-4 w-full max-w-2xl">
@@ -229,8 +299,12 @@ const Home = () => {
                                     <ActionButton onClick={handleSubmitInput} text="Interrogate" />
                                     <button
                                         onClick={openModal}
-                                        disabled={killerChosen}
-                                        className={`px-4 py-2 rounded-md ${killerChosen ? 'bg-gray-500 cursor-not-allowed' : 'bg-red-500 hover:bg-red-600 text-white'}`}
+                                        disabled={!clues.locket || !clues.vase || !clues.will}  // Disable button if any clue is missing
+                                        className={`px-4 py-2 rounded-md ${
+                                            killerChosen || !clues.locket || !clues.vase || !clues.will
+                                                ? 'bg-gray-500 cursor-not-allowed'
+                                                : 'bg-red-500 hover:bg-red-700 text-white'
+                                        }`}
                                     >
                                         Choose Killer
                                     </button>

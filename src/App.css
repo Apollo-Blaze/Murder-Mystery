@@ -175,7 +175,6 @@ html, body {
 /* Style for ActionButton */
 button, .ActionButton {
   padding: 0.5rem 1rem;
-  background-color: #ef4444; /* Red background for action buttons */
   color: white;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -184,6 +183,7 @@ button, .ActionButton {
 
 button:hover, .ActionButton:hover {
   background-color: #dc2626; /* Darker red on hover */
+  color:white;
 }
 
 /* Style for choose killer button */
