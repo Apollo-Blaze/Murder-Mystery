@@ -1,1 +1,2 @@
-web: python app.py
+git add .
+git commit -m "Set up Gunicorn for production deployment"
