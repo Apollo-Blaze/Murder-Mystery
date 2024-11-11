@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Suspect from './Suspect.jsx';
-import ActionButton from './actionbutton';
+import ActionButton from './ActionButton.jsx';
 import '../App.css';
 import Music from '../assets/music.mp3';
 
