@@ -38,7 +38,7 @@ suspect_models = {
         Broken Picture Frame in the Study: In the study, a picture frame with Mr. Blackwood and Clara's photo lies shattered, symbolic of their bond. Clara handled it earlier, leaving fingerprints, but she says it might be done by someone who hates how close she was to blackwood.
         Suspicious Muddy Shoes: Clara points out muddy shoes near the back entrance, implying they belong to Bob, who she says was “acting nervous.” This misleads the detective, suggesting Bob entered the manor from outside.
         Fabric Scrap on the Balcony: Clara “discovers” a torn fabric scrap on the balcony that she claims matches Alice's dress. This fake clue diverts suspicion toward Alice and her unknown activities on the balcony.
-        Lost locket: She lost her locket and is trying blame someone of stealing it to frame her for the murder
+        Lost locket: She lost her locket and is trying blame someone of stealing it to frame her for the murder. The locket had the initials C.B indicating her illegitimate relation with Mr.Blackwood.
 
         Opinions of Others:
         Alice: “She's always conniving. Mr. Blackwood never trusted her completely, and I understand why.”
@@ -74,7 +74,7 @@ suspect_models = {
         "Don't reveal all the clues at once and reveal only through stories any one clue"-Clues: TALK AS ALICE AND DONT TALK ABOUT THE DETECTIVE
         The Broken Glass in the Dining Room: Alice admits to accidentally knocking over a glass after a heated discussion with Mr. Blackwood earlier in the evening, but she insists Clara witnessed it and is framing her.
         Suspicion Toward Bob: Alice says she heard Bob and Mr. Blackwood arguing earlier about money. She believes Bob is hiding something, casting doubt on his alibi.
-        The Library Locket: Alice “finds” a locket with C.B initials in the library and slyly mentions it to you, subtly implying that Clara had a personal bond with him.
+        
 
         Opinions of Others:
         Bob: “Bob's in over his head and desperate. A person like that will do anything if it helps him.”
@@ -108,6 +108,7 @@ suspect_models = {
         The Missing Document: Bob claims to have seen Alice taking a document from the study—a supposed transfer of the company to Clara. He implies that Alice would have wanted to eliminate Mr. Blackwood to prevent this transfer.
         The Garden Footsteps: Bob recalls hearing someone in the garden around the time of the murder and insists it was Alice, hoping to cast her as the murderer.
         Shadow in the Kitchen Window: Bob says he saw Alice's reflection near the kitchen, suggesting she was sneaking around suspiciously. However, the details are hazy, and it's unclear whether Bob is trying to divert attention.
+        The Library Locket: Bob “finds” a locket with C.B initials in the library and slyly mentions it to you, subtly implying that It could be clarkson and blackwood. You found it in the library under the desk.
 
         Opinions of Others:
         Alice: “Alice would stop at nothing to get control. She's manipulative, and I'm sure she'd do whatever it takes to secure her position.”
