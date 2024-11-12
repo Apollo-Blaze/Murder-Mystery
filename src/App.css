@@ -27,7 +27,17 @@ html, body {
   background-position: center center;
   background-repeat: no-repeat;
   overflow-y: auto; /* Allow scrolling inside these containers */
-} .bg-diningRoom{
+} 
+.bg-garden-f{
+  background-image: url('./assets/garden.jpg');
+  height: 100%; /* Ensure the background image takes up full height */
+  min-height: 100vh; /* Ensure the container doesn't shrink */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow-y: auto; /* Allow scrolling inside these containers */
+} 
+.bg-diningRoom{
   background-image: url('./assets/diningRoom.jpg');
   height: 100%; /* Ensure the background image takes up full height */
   min-height: 100vh; /* Ensure the container doesn't shrink */
@@ -35,8 +45,24 @@ html, body {
   background-position: center center;
   background-repeat: no-repeat;
   overflow-y: auto; /* Allow scrolling inside these containers */
-} .bg-kitchen{
+} .bg-diningRoom-f{
+  background-image: url('./assets/diningRoom-f.jpg');
+  height: 100%; /* Ensure the background image takes up full height */
+  min-height: 100vh; /* Ensure the container doesn't shrink */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow-y: auto; /* Allow scrolling inside these containers */
+}.bg-kitchen{
   background-image: url('./assets/kitchen.jpg');
+  height: 100%; /* Ensure the background image takes up full height */
+  min-height: 100vh; /* Ensure the container doesn't shrink */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow-y: auto; /* Allow scrolling inside these containers */
+}.bg-kitchen-f{
+  background-image: url('./assets/kitchenf.jpg');
   height: 100%; /* Ensure the background image takes up full height */
   min-height: 100vh; /* Ensure the container doesn't shrink */
   background-size: cover;
@@ -51,6 +77,14 @@ html, body {
   background-position: center center;
   background-repeat: no-repeat;
   overflow-y: auto; /* Allow scrolling inside these containers */
+}.bg-study-f{
+  background-image: url('./assets/studyf.jpg');
+  height: 100%; /* Ensure the background image takes up full height */
+  min-height: 100vh; /* Ensure the container doesn't shrink */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow-y: auto; /* Allow scrolling inside these containers */
 } .bg-balcony{
   background-image: url('./assets/balcony.jpg');
   height: 100%; /* Ensure the background image takes up full height */
@@ -59,8 +93,25 @@ html, body {
   background-position: center center;
   background-repeat: no-repeat;
   overflow-y: auto; /* Allow scrolling inside these containers */
-} .bg-basement {
+}.bg-balcony-f{
+  background-image: url('./assets/balconyf.jpg');
+  height: 100%; /* Ensure the background image takes up full height */
+  min-height: 100vh; /* Ensure the container doesn't shrink */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow-y: auto; /* Allow scrolling inside these containers */
+} .bg-library {
   background-image: url('./assets/basement.jpg');
+  height: 100%; /* Ensure the background image takes up full height */
+  min-height: 100vh; /* Ensure the container doesn't shrink */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow-y: auto; /* Allow scrolling inside these containers */
+}
+.bg-library-f {
+  background-image: url('./assets/basementf.jpg');
   height: 100%; /* Ensure the background image takes up full height */
   min-height: 100vh; /* Ensure the container doesn't shrink */
   background-size: cover;
@@ -73,7 +124,7 @@ html, body {
 .bg-kitchen::-webkit-scrollbar,
 .bg-study::-webkit-scrollbar,
 .bg-balcony::-webkit-scrollbar,
-.bg-basement::-webkit-scrollbar {
+.bg-library::-webkit-scrollbar {
   display: none; /* Hide the scrollbar */
 }
 
@@ -82,7 +133,26 @@ html, body {
 .bg-kitchen,
 .bg-study,
 .bg-balcony,
-.bg-basement {
+.bg-library {
+  -ms-overflow-style: none;  /* For Internet Explorer 10+ */
+  scrollbar-width: none;      /* For Firefox */
+}
+
+.bg-garden-f::-webkit-scrollbar,
+.bg-diningRoom-f::-webkit-scrollbar,
+.bg-kitchen-f::-webkit-scrollbar,
+.bg-study-f::-webkit-scrollbar,
+.bg-balcony-f::-webkit-scrollbar,
+.bg-library-f::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar */
+}
+
+.bg-garden-f,
+.bg-diningRoom-f,
+.bg-kitchen-f,
+.bg-study-f,
+.bg-balcony-f,
+.bg-library-f {
   -ms-overflow-style: none;  /* For Internet Explorer 10+ */
   scrollbar-width: none;      /* For Firefox */
 }

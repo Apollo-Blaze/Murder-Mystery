@@ -25,11 +25,10 @@ const EndPage = () => {
     },
     {
       title: "The Suspicious Clues",
-      content: `1. Locket: Clara's locket was found near the crime scene, hinting at her involvement.
+      content: `1. Timeline: Clara's alibi was off when the party actually ended at 9PM and she said was talking to the guests at 10PM.
       \n2. Broken Picture: The broken picture on the wall in the study hinted at a struggle, possibly between Clara and Mr. Blackwood.
-      \n3. Perfume in the Kitchen: Witnesses noticed an unfamiliar perfume scent in the kitchen—later linked to Clara, who wore that same scent.
-      \n4. Garden Whispering: Clara overheard Alice and Bob conspiring in the garden, prompting her urgency to act.
-      \n5. Footsteps on the Balcony: Bob spotted Clara retreating from the balcony after the murder, casting suspicion on her, though he initially pointed to Alice.`,
+      \n3. Garden Whispering: Clara overheard Alice and Bob conspiring in the garden, prompting her urgency to act.
+      \n4. Locket in the Library: Alice spotted a locket with the initials C.B indicating Clara Blackwood`,
     },
     {
       title: "The Final Reveal",
@@ -37,10 +36,30 @@ const EndPage = () => {
     },
   ];
 
+  // Timeline of events, explaining the details of Clara's alibi and how it didn't match.
+  const timeline = [
+    {
+      time: "7:00 PM",
+      event: "Mr. Blackwood hosts a dinner where all suspects are present."
+    },
+    {
+      time: "8:30 PM",
+      event: "Alice and Bob were talking in the garden about the future of the company and Blackwood's decision to give everything to Clara, which was overheard by Clara"
+    },
+    {
+      time: "9:00 PM",
+      event: "The party ended and the guests left."
+    },
+    {
+      time: "10:00 PM",
+      event: "Mr. Blackwood's body is discovered in the study by Alice. Clara initially denies seeing anything unusual, but the timeline doesn’t match her alibi."
+    },
+  ];
+
   return (
     <div
       className="relative flex items-center justify-center h-screen bg-cover bg-center"
-      style={{ backgroundImage: `url(${end})` }} // Corrected line
+      style={{ backgroundImage: `url(${end})` }}
     >
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="bg-black bg-opacity-90 p-8 rounded-3xl text-center text-white min-w-[300px] max-w-2xl max-h-[70vh] overflow-y-auto custom-scrollbar">
@@ -55,6 +74,19 @@ const EndPage = () => {
                 <p className="text-sm opacity-80 mt-2 whitespace-pre-line">{section.content}</p>
               </div>
             ))}
+          </div>
+
+          {/* Timeline Section */}
+          <div className="text-left text-white mt-6 space-y-4">
+            <h2 className="text-2xl font-semibold">Timeline of Events</h2>
+            {timeline.map((event, index) => (
+              <div key={index} className="mb-4">
+                <p className="text-sm opacity-80 mt-2">{event.time} - {event.event}</p>
+              </div>
+            ))}
+            <p className="text-sm opacity-80 mt-4">
+              Clara's alibi didn't match the timeline. She claimed to be in the kitchen preparing dessert, but witnesses placed her elsewhere and her perfume scent was found near the crime scene. The timeline of events proved her guilt.
+            </p>
           </div>
 
           <motion.button

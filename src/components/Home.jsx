@@ -22,17 +22,19 @@ const Home = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [clues, setClues] = useState({
         locket: false,
-        will: false,
+        death: false,
+        guest: false,
+        kitchen: false,
         frame: false,
-        weapon: false,
-        scent: false,
+        glass:false,
+        outside:false
     }); // Track discovered clues
     const [isNotepadOpen, setIsNotepadOpen] = useState(false);
+    const [showForensic, setshowForensic] = useState(true);
 
     const toggleNotepad = () => {
         setIsNotepadOpen(!isNotepadOpen);
     };
-
     useEffect(() => {
         audioRef.current.play();
         audioRef.current.loop = true; 
@@ -48,7 +50,7 @@ const Home = () => {
         setIsPlaying(!isPlaying);
     };
 
-    const locations = ['garden', 'diningRoom', 'kitchen', 'study', 'basement', 'balcony'];
+    const locations = ['garden', 'diningRoom', 'kitchen', 'study', 'library', 'balcony'];
     const navigate = useNavigate();
 
     const changeLocation = (newLocation) => {
@@ -115,17 +117,23 @@ const Home = () => {
                     if (data.response.includes("locket")) {
                         setClues(prevClues => ({ ...prevClues, locket: true }));
                     }
-                    if (data.response.includes("document")) {
-                        setClues(prevClues => ({ ...prevClues, will: true }));
+                    if (data.response.includes("10")) {
+                        setClues(prevClues => ({ ...prevClues, death: true }));
+                    }
+                    if (data.response.includes("9")) {
+                        setClues(prevClues => ({ ...prevClues, guest: true }));
+                    }
+                    if (data.response.includes("shoe" || "shoes" || "print")) {
+                        setClues(prevClues => ({ ...prevClues, kitchen: true }));
                     }
                     if (data.response.includes("frame")) {
                         setClues(prevClues => ({ ...prevClues, frame: true }));
                     }
-                    if (data.response.includes("opener")) {
-                        setClues(prevClues => ({ ...prevClues, weapon: true }));
+                    if (data.response.includes("glass")) {
+                        setClues(prevClues => ({ ...prevClues, glass: true }));
                     }
-                    if (data.response.includes("perfume")) {
-                        setClues(prevClues => ({ ...prevClues, scent: true }));
+                    if (data.response.includes("outside" && "kitchen")) {
+                        setClues(prevClues => ({ ...prevClues, outside: true }));
                     }
                 })
                 .catch((error) => {
@@ -209,7 +217,7 @@ const Home = () => {
                 </nav>)}
                 
 
-            <div className={`relative z-0 bg-${location} bg-cover min-h-fit bg-center px-4`}>
+                <div className={`relative z-0 ${showForensic ? `bg-${location}` : `bg-${location}-f`} bg-cover min-h-fit bg-center px-4`}>
                 {isLoading && (
                     <motion.div
                         initial={{ x: '-100%' }}
@@ -224,7 +232,7 @@ const Home = () => {
                 
 
                 {/* Main Content */}
-                <div className={`min-h-full bg-${location} bg-hero-pattern bg-repeat bg-center flex flex-col items-center justify-start pt-10 `}>
+                <div className={`min-h-full ${showForensic ? `bg-${location}` : `bg-${location}-f`} bg-hero-pattern bg-repeat bg-center flex flex-col items-center justify-start pt-10 `}>
                     {/* Character Selection and Controls */}
                     {showControls && (
                         <>
@@ -241,13 +249,7 @@ const Home = () => {
                                 ))}
                             </div>
 
-                            <button
-                                onClick={toggleNotepad}
-                                className="px-4 py-4 bg-blue-500 bg-opacity-70 text-white rounded-lg shadow-md hover:bg-red-600 transition duration-300 fixed top-36 right-4 sm:top-32 sm:right-8 z-40"
-                            >
-                                📒
-                            </button>
-
+                            
                             {/* Notepad Modal */}
                             <AnimatePresence>
   {isNotepadOpen && (
@@ -272,19 +274,27 @@ const Home = () => {
             <hr className="border-gray-600 my-2" />
           </li>
           <li>
-            {clues.weapon ? '✅ Weapon (Fingerprint of Clara)' : '???'}
+            {clues.death ? '✅ Time of Death (10 PM)' : '???'}
             <hr className="border-gray-600 my-2" />
           </li>
           <li>
-            {clues.will ? "✅ Will (Company's Control)" : '???'}
+            {clues.guest ? "✅ Part ended at 9 PM" : '???'}
             <hr className="border-gray-600 my-2" />
           </li>
           <li>
-            {clues.scent ? '✅ Perfume (Kitchen)' : '???'}
+            {clues.kitchen ? '✅ Muddy shoe print (Kitchen)' : '???'}
             <hr className="border-gray-600 my-2" />
           </li>
           <li>
-            {clues.frame ? '✅ Broken Frame (Clara’s Photo)' : '???'}
+            {clues.frame ? '✅ Broken Frame (Clara’s and Blackwood’s Photo)' : '???'}
+            <hr className="border-gray-600 my-2" />
+          </li>
+          <li>
+            {clues.outside ? '✅ Alice and Bob discussing' : '???'}
+            <hr className="border-gray-600 my-2" />
+          </li>
+          <li>
+            {clues.glass ? '✅ Broken Glass (Blood of Alice)' : '???'}
             <hr className="border-gray-600 my-2" />
           </li>
         </ul>
@@ -315,9 +325,9 @@ const Home = () => {
                                     <ActionButton onClick={handleSubmitInput} text="Interrogate" />
                                     <button
                                         onClick={openModal}
-                                        disabled={!clues.weapon || !clues.will || !clues.frame}  // Disable button if any clue is missing
+                                        disabled={!clues.death || !clues.guest || !clues.locket}  // Disable button if any clue is missing
                                         className={`px-4 py-2 rounded-md ${
-                                            killerChosen || !clues.weapon || !clues.will || !clues.frame
+                                            killerChosen || !clues.death || !clues.guest || !clues.locket
                                                 ? 'bg-gray-500 cursor-not-allowed'
                                                 : 'bg-red-500 hover:bg-red-700 text-white'
                                         }`}
@@ -371,7 +381,23 @@ const Home = () => {
                     >
                         {showControls ? 'Hide Controls' : 'Show Controls'}
                     </button>
+                    
                 </div>)}
+                {!isMobileMenuOpen && (<div className="fixed top-36 right-4 sm:top-32 sm:right-8 z-40">
+                    <button
+                        onClick={() => setshowForensic(!showForensic)}
+                        className="px-4 py-4 bg-blue-500 bg-opacity-60 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
+                    >
+                        {showForensic ? '🔦' : '❌'}
+                    </button>                    
+                </div>
+                )}
+                {showControls && (<button
+                                onClick={toggleNotepad}
+                                className="px-4 py-4 bg-blue-500 bg-opacity-70 text-white rounded-lg shadow-md hover:bg-red-600 transition duration-300 fixed top-52 right-4 sm:top-48 sm:right-8 z-40"
+                            >
+                                📒
+                            </button>)}
                 <button
                     onClick={togglePlayPause}
                     className="fixed bottom-8 right-8 bg-gray-800 text-white p-4 rounded-xl shadow-md focus:outline-none opacity-70 hover:opacity-95"
