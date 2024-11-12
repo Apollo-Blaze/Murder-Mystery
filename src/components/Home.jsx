@@ -118,10 +118,10 @@ const Home = () => {
                     if (data.response.includes("document")) {
                         setClues(prevClues => ({ ...prevClues, will: true }));
                     }
-                    if (data.response.includes("picture frame")) {
+                    if (data.response.includes("frame")) {
                         setClues(prevClues => ({ ...prevClues, frame: true }));
                     }
-                    if (data.response.includes("letter opener")) {
+                    if (data.response.includes("opener")) {
                         setClues(prevClues => ({ ...prevClues, weapon: true }));
                     }
                     if (data.response.includes("perfume")) {
