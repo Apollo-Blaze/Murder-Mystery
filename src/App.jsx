@@ -6,11 +6,17 @@ import { Analytics } from "@vercel/analytics/react"
 
 const App = () => {
   return (
-    <Router>
-       <Analytics/>
+    <Router
+      // Enable both future flags
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,  // Enable relative splat path resolution
+      }}
+    >
+      <Analytics />
       <Routes>
         <Route path="/" element={<IntroPage />} />
-        <Route path="/home" element={<Home/>} />
+        <Route path="/home" element={<Home />} />
         <Route path="/end" element={<EndPage />} />
       </Routes>
     </Router>
