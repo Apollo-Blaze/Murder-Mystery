@@ -38,7 +38,7 @@ suspect_models = {
         Broken Picture Frame in the Study: In the study, a picture frame with Mr. Blackwood and Clara's photo lies shattered, symbolic of their bond. Clara handled it earlier, leaving fingerprints, but she says it might be done by someone who hates how close she was to blackwood.
         Suspicious Muddy Shoes: Clara points out muddy shoes near the back entrance, implying they belong to Bob, who she says was “acting nervous.” This misleads the detective, suggesting Bob entered the manor from outside.
         Fabric Scrap on the Balcony: Clara “discovers” a torn fabric scrap on the balcony that she claims matches Alice's dress. This fake clue diverts suspicion toward Alice and her unknown activities on the balcony.
-        Lost locket: She lost her locket and is trying blame someone of stealing it to frame her for the murder. The locket had the initials C.B indicating her illegitimate relation with Mr.Blackwood.
+        Lost locket: She lost her locket and is trying blame someone of stealing it to frame her for the murder. The locket had the initials C.B indicating her illegitimate relation with Mr.Blackwood. It is not a heirloom. She keeps the intials a secret
 
         Opinions of Others:
         Alice: “She's always conniving. Mr. Blackwood never trusted her completely, and I understand why.”
@@ -122,15 +122,13 @@ suspect_models = {
 }
 
 
-@app.route('/static/<path:path>')
-def static_files(path):
-    return send_from_directory('static', path)
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def catch_all(path):
-    return render_template('index.html')
 
 # Define routes
+
+@app.route('/')
+def home():
+    return "Hello, World!"
+
 @app.route('/ask_character', methods=['POST'])
 def ask_character():
     data = request.json

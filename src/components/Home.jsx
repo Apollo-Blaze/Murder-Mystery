@@ -31,6 +31,36 @@ const Home = () => {
     }); // Track discovered clues
     const [isNotepadOpen, setIsNotepadOpen] = useState(false);
     const [showForensic, setshowForensic] = useState(true);
+    const [isListening, setIsListening] = useState(false);
+
+    const handleSpeechToText = () => {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'en-US';  // Change this to your preferred language
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        recognition.start();
+
+        recognition.onstart = () => {
+            setIsListening(true);
+        };
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            setUserInput(transcript);
+            setIsListening(false);
+        };
+
+        recognition.onerror = (event) => {
+            console.error('Speech recognition error:', event.error);
+            setIsListening(false);
+        };
+
+        recognition.onend = () => {
+            setIsListening(false);
+        };
+    };
 
     const toggleNotepad = () => {
         setIsNotepadOpen(!isNotepadOpen);
@@ -252,91 +282,97 @@ const Home = () => {
                             
                             {/* Notepad Modal */}
                             <AnimatePresence>
-  {isNotepadOpen && (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5, ease: 'easeInOut' }}
-      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
-    >
-      <motion.div
-        initial={{ x: -150 }}
-        animate={{ x: 0 }}
-        exit={{ x: 150 }}
-        transition={{ duration: 0.5, ease: 'easeInOut' }}
-        className="bg-yellow-300 text-black p-4 w-fit mt-10 text-center pr-7"
-      >
-        <h2 className="text-3xl mb-4 font-bold">Clues Discovered</h2>
-        <ul className="text-xl pl-5">
-          <li>
-            {clues.locket ? '✅ Locket' : '???'}
-            <hr className="border-gray-600 my-2" />
-          </li>
-          <li>
-            {clues.death ? '✅ Time of Death (10 PM)' : '???'}
-            <hr className="border-gray-600 my-2" />
-          </li>
-          <li>
-            {clues.guest ? "✅ Party ended at 9 PM" : '???'}
-            <hr className="border-gray-600 my-2" />
-          </li>
-          <li>
-            {clues.kitchen ? '✅ Muddy shoe print (Kitchen)' : '???'}
-            <hr className="border-gray-600 my-2" />
-          </li>
-          <li>
-            {clues.frame ? '✅ Broken Frame (Clara’s and Blackwood’s Photo)' : '???'}
-            <hr className="border-gray-600 my-2" />
-          </li>
-          <li>
-            {clues.outside ? '✅ Alice and Bob discussing' : '???'}
-            <hr className="border-gray-600 my-2" />
-          </li>
-          <li>
-            {clues.glass ? '✅ Broken Glass (Blood of Alice)' : '???'}
-            <hr className="border-gray-600 my-2" />
-          </li>
-        </ul>
-        <button
-          onClick={toggleNotepad}
-          className="mt-4 px-6 py-2 bg-gray-700 text-white rounded-md hover:bg-red-600"
-        >
-          Close
-        </button>
-      </motion.div>
-    </motion.div>
-  )}
-</AnimatePresence>
+                                {isNotepadOpen && (
+                                    <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.5, ease: 'easeInOut' }}
+                                    className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+                                    >
+                                    <motion.div
+                                        initial={{ x: -150 }}
+                                        animate={{ x: 0 }}
+                                        exit={{ x: 150 }}
+                                        transition={{ duration: 0.5, ease: 'easeInOut' }}
+                                        className="bg-yellow-300 text-black p-4 w-fit mt-10 text-center pr-7"
+                                    >
+                                        <h2 className="text-3xl mb-4 font-bold">Clues Discovered</h2>
+                                        <ul className="text-xl pl-5">
+                                        <li>
+                                            {clues.locket ? '✅ Locket' : '???'}
+                                            <hr className="border-gray-600 my-2" />
+                                        </li>
+                                        <li>
+                                            {clues.death ? '✅ Time of Death (10 PM)' : '???'}
+                                            <hr className="border-gray-600 my-2" />
+                                        </li>
+                                        <li>
+                                            {clues.guest ? "✅ Party ended at 9 PM" : '???'}
+                                            <hr className="border-gray-600 my-2" />
+                                        </li>
+                                        <li>
+                                            {clues.kitchen ? '✅ Muddy shoe print (Kitchen)' : '???'}
+                                            <hr className="border-gray-600 my-2" />
+                                        </li>
+                                        <li>
+                                            {clues.frame ? '✅ Broken Frame (Clara’s and Blackwood’s Photo)' : '???'}
+                                            <hr className="border-gray-600 my-2" />
+                                        </li>
+                                        <li>
+                                            {clues.outside ? '✅ Alice and Bob discussing' : '???'}
+                                            <hr className="border-gray-600 my-2" />
+                                        </li>
+                                        <li>
+                                            {clues.glass ? '✅ Broken Glass (Blood of Alice)' : '???'}
+                                            <hr className="border-gray-600 my-2" />
+                                        </li>
+                                        </ul>
+                                        <button
+                                        onClick={toggleNotepad}
+                                        className="mt-4 px-6 py-2 bg-gray-700 text-white rounded-md hover:bg-red-600"
+                                        >
+                                        Close
+                                        </button>
+                                    </motion.div>
+                                    </motion.div>
+                                )}
+                                </AnimatePresence>
 
                             {/* Input and Action Buttons */}
                             <div className="flex flex-col items-center justify-center bg-gray-800 px-6 py-6 md:px-10 md:py-10 rounded-xl max-w-full max-h-fit">
-                                <div className="flex flex-wrap items-center gap-4 w-full max-w-2xl">
-                                    <input
-                                        type="text"
-                                        value={userInput}
-                                        onChange={handleUserInputChange}
-                                        onKeyDown={(e) => {
-                                            if (e.key === 'Enter') handleSubmitInput();
-                                        }}
-                                        placeholder="Interrogate the suspect..."
-                                        className="flex-grow px-4 py-2 border rounded-md text-white bg-gray-700 placeholder-gray-400 focus:outline-none w-full sm:w-auto"
-                                    />
-                                    <ActionButton onClick={handleSubmitInput} text="Interrogate" />
-                                    <button
-                                        onClick={openModal}
-                                        disabled={!clues.death || !clues.guest || !clues.locket}  // Disable button if any clue is missing
-                                        className={`px-4 py-2 rounded-md ${
-                                            killerChosen || !clues.death || !clues.guest || !clues.locket
-                                                ? 'bg-gray-500 cursor-not-allowed'
-                                                : 'bg-red-500 hover:bg-red-700 text-white'
-                                        }`}
-                                    >
-                                        Choose Killer
-                                    </button>
-                                </div>
+                            <div className="flex flex-wrap items-center gap-4 w-full max-w-2xl justify-center"> {/* Added justify-between */}
+                                <input
+                                    type="text"
+                                    value={userInput}
+                                    onChange={handleUserInputChange}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') handleSubmitInput();
+                                    }}
+                                    placeholder="Ask a question..."
+                                    className="flex-grow px-4 py-2 border rounded-md text-white bg-gray-700 placeholder-gray-400 focus:outline-none w-auto "
+                                />
+                                <button
+                                    onClick={handleSpeechToText}
+                                    disabled={isListening}
+                                    className=" px-2 py-2 bg-indigo-600 text-white rounded-2xl"
+                                >
+                                    {isListening ? 'Listening...' : '🎙️'}
+                                </button>
+                                <ActionButton onClick={handleSubmitInput} text="Interrogate" />
+                                <button
+                                    onClick={openModal}
+                                    disabled={!clues.death || !clues.guest || !clues.locket}  // Disable button if any clue is missing
+                                    className={`px-4 py-2 rounded-md ${
+                                        killerChosen || !clues.death || !clues.guest || !clues.locket
+                                            ? 'bg-gray-500 cursor-not-allowed'
+                                            : 'bg-red-500 hover:bg-red-700 text-white'
+                                    }`}
+                                >
+                                    Choose Killer
+                                </button>
                             </div>
-
+                        </div>
 
                         </>
                     )}
@@ -386,7 +422,7 @@ const Home = () => {
                 {!isMobileMenuOpen && (<div className="fixed top-36 right-4 sm:top-32 sm:right-8 z-40">
                     <button
                         onClick={() => setshowForensic(!showForensic)}
-                        className="px-4 py-4 bg-blue-500 bg-opacity-60 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
+                        className="px-4 py-4 bg-blue-500 bg-opacity-60 text-white rounded-3xl shadow-md hover:bg-blue-600 transition duration-300"
                     >
                         {showForensic ? '🔦' : '❌'}
                     </button>                    
@@ -394,13 +430,13 @@ const Home = () => {
                 )}
                 {showControls && (<button
                                 onClick={toggleNotepad}
-                                className="px-4 py-4 bg-blue-500 bg-opacity-70 text-white rounded-lg shadow-md hover:bg-red-600 transition duration-300 fixed top-52 right-4 sm:top-48 sm:right-8 z-40"
+                                className="px-4 py-4 bg-blue-500 bg-opacity-70 text-white rounded-3xl shadow-md hover:bg-red-600 transition duration-300 fixed top-52 right-4 sm:top-48 sm:right-8 z-40"
                             >
                                 📒
                             </button>)}
                 <button
                     onClick={togglePlayPause}
-                    className="fixed bottom-8 right-8 bg-gray-800 text-white p-4 rounded-xl shadow-md focus:outline-none opacity-70 hover:opacity-95"
+                    className="fixed bottom-8 right-8 bg-gray-800 text-white p-4 rounded-3xl shadow-md focus:outline-none opacity-70 hover:opacity-95"
                 >
                     {isPlaying ? '🎧' : '🔇'}
                 </button>
