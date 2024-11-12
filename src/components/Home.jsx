@@ -123,7 +123,7 @@ const Home = () => {
                     if (data.response.includes("9")) {
                         setClues(prevClues => ({ ...prevClues, guest: true }));
                     }
-                    if (data.response.includes("shoe" || "shoes" || "print")) {
+                    if (data.response.includes("shoe" || "shoes" || "print" || "shoeprint" || "foot" || "footprint")) {
                         setClues(prevClues => ({ ...prevClues, kitchen: true }));
                     }
                     if (data.response.includes("frame")) {
@@ -278,7 +278,7 @@ const Home = () => {
             <hr className="border-gray-600 my-2" />
           </li>
           <li>
-            {clues.guest ? "✅ Part ended at 9 PM" : '???'}
+            {clues.guest ? "✅ Party ended at 9 PM" : '???'}
             <hr className="border-gray-600 my-2" />
           </li>
           <li>

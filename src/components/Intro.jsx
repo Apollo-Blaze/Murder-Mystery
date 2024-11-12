@@ -68,6 +68,15 @@ const IntroPage = () => {
               <span className='font-bold text-2xl'>Your Mission:</span>
               <br />
               As the detective, it's your job to question the suspects, explore the various locations, and piece together the story of Mr. Blackwood’s demise. Use your intuition, gather all the evidence, and determine who the killer is before it's too late!
+              <br /><br />
+
+              <span className='font-bold text-2xl'>Instructions:</span>
+              <br />
+              There are multiple clues in the story and you have to uncover the most important three clues to choose the killer. There is a forensic button to help you find clues.
+              <br /><br />
+              Good Luck!!
+              <br />
+
             </p>
             
             <motion.button
