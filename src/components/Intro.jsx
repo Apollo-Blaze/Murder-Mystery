@@ -15,27 +15,27 @@ const IntroPage = () => {
           <div className="bg-black bg-opacity-70 p-8 rounded-3xl text-center text-white min-w-[300px] max-w-2xl max-h-[70vh] overflow-y-auto custom-scrollbar">
             <h1 className="text-3xl font-bold mb-4">Welcome to the Ravenswood Murder</h1>
             <p className="text-lg mb-6 text-left">
-              Welcome to Ravenswood Manor, where mystery and danger lurk in every shadow. Mr. Blackwood was found dead in the grand estate, and it’s up to you, the detective, to unravel the truth behind his demise. The primary suspects are Alice, his business partner; Bob, his estranged brother; and Clara, a longtime family friend.
+              Welcome to Ravenswood Manor, where mystery and danger lurk in every shadow. Mr. Blackwood was found dead in the grand estate, and it's up to you, the detective, to unravel the truth behind his demise. The primary suspects are Alice, his business partner; Bob, his estranged brother; and Clara, a longtime family friend.
 
               <br /><br />
               <span className='font-bold text-2xl'>The Storyline:</span>
               <br />
-              Mr. Blackwood was discovered lifeless in the study late one stormy night. His death has cast a dark shadow over Ravenswood Manor, and the mystery surrounding it grows with every passing hour. As the detective, you will need to investigate the manor’s different rooms, question the suspects, and discover what secrets lie hidden within its walls.
+              Welcome to Ravenswood Manor, a grand yet ominous estate enveloped in shadow and intrigue. Mr. Reginald Blackwood, a wealthy and enigmatic figure, was found dead in his study on a stormy night. He held a powerful company whose future was filled with promise—but also peril. This future was to be overseen by someone he trusted deeply, but his decision was unknown to all but a select few. You, the detective, must piece together clues from within the manor’s eerie rooms to unveil the truth behind Mr. Blackwood’s death.
               <br /><br />
               
               <span className='font-bold text-2xl'>Suspect Profiles:</span>
               <br />
               <span className='font-bold'>1. Alice - The Business Partner:</span>
               <br />
-              Alice is Mr. Blackwood's business partner, and their recent disagreements over the future of the company have raised suspicions. She claims to have been reading in the library when the incident occurred, but her story seems inconsistent.
+              Alice is Mr. Blackwood’s ambitious business partner, known for her ruthlessness in pursuit of power.
               <br /><br />
               <span className='font-bold'>2. Bob - The Estranged Brother:</span>
               <br />
-              Bob, Mr. Blackwood’s estranged brother, recently returned to town after many years. He says he was alone in the billiard room but speaks hesitantly when recounting his whereabouts that night.
+              Bob,  Mr. Blackwood’s estranged brother, who returned with financial troubles and a desperate need for a fresh start.
               <br /><br />
               <span className='font-bold'>3. Clara - The Family Friend:</span>
               <br />
-              Clara, a longtime family friend, appears to have a hidden agenda. She was seen mingling in the grand hall but disappeared for a while, raising questions about her involvement in the events surrounding Mr. Blackwood’s death.
+              Clara, The family’s longtime caretaker and Mr. Blackwood’s trusted confidante, who was closer to him than anyone realized.
 
               <br /><br />
               <span className='font-bold text-2xl'>Key Locations:</span>

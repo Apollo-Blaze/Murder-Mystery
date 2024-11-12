@@ -22,8 +22,10 @@ const Home = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [clues, setClues] = useState({
         locket: false,
-        vase: false,
         will: false,
+        frame: false,
+        weapon: false,
+        scent: false,
     }); // Track discovered clues
     const [isNotepadOpen, setIsNotepadOpen] = useState(false);
 
@@ -113,11 +115,17 @@ const Home = () => {
                     if (data.response.includes("locket")) {
                         setClues(prevClues => ({ ...prevClues, locket: true }));
                     }
-                    if (data.response.includes("vase")) {
-                        setClues(prevClues => ({ ...prevClues, vase: true }));
-                    }
-                    if (data.response.includes("will")) {
+                    if (data.response.includes("document")) {
                         setClues(prevClues => ({ ...prevClues, will: true }));
+                    }
+                    if (data.response.includes("picture frame")) {
+                        setClues(prevClues => ({ ...prevClues, frame: true }));
+                    }
+                    if (data.response.includes("letter opener")) {
+                        setClues(prevClues => ({ ...prevClues, weapon: true }));
+                    }
+                    if (data.response.includes("perfume")) {
+                        setClues(prevClues => ({ ...prevClues, scent: true }));
                     }
                 })
                 .catch((error) => {
@@ -264,11 +272,19 @@ const Home = () => {
             <hr className="border-gray-600 my-2" />
           </li>
           <li>
-            {clues.vase ? '✅ Vase (Dining Room)' : '???'}
+            {clues.weapon ? '✅ Weapon (Fingerprint of Clara)' : '???'}
             <hr className="border-gray-600 my-2" />
           </li>
           <li>
-            {clues.will ? '✅ Will (Clara’s Room)' : '???'}
+            {clues.will ? "✅ Will (Company's Control)" : '???'}
+            <hr className="border-gray-600 my-2" />
+          </li>
+          <li>
+            {clues.scent ? '✅ Perfume (Kitchen)' : '???'}
+            <hr className="border-gray-600 my-2" />
+          </li>
+          <li>
+            {clues.frame ? '✅ Broken Frame (Clara’s Photo)' : '???'}
             <hr className="border-gray-600 my-2" />
           </li>
         </ul>
@@ -299,9 +315,9 @@ const Home = () => {
                                     <ActionButton onClick={handleSubmitInput} text="Interrogate" />
                                     <button
                                         onClick={openModal}
-                                        disabled={!clues.locket || !clues.vase || !clues.will}  // Disable button if any clue is missing
+                                        disabled={!clues.weapon || !clues.will || !clues.frame}  // Disable button if any clue is missing
                                         className={`px-4 py-2 rounded-md ${
-                                            killerChosen || !clues.locket || !clues.vase || !clues.will
+                                            killerChosen || !clues.weapon || !clues.will || !clues.frame
                                                 ? 'bg-gray-500 cursor-not-allowed'
                                                 : 'bg-red-500 hover:bg-red-700 text-white'
                                         }`}
