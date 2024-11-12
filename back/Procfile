@@ -1,2 +1,1 @@
-git add .
-git commit -m "Set up Gunicorn for production deployment"
+web: gunicorn -w 4 app:app
