@@ -1,8 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import IntroPage from './components/Intro';
-import EndPage from './components/EndPage';
-import Home from './components/Home'; // If you have this as the main page
-import { Analytics } from "@vercel/analytics/react"
+import React,{ Suspense } from 'react';
+import './Loader.css'; // Import the CSS file for styling the loader
+import './App.css'
+
+const Loader = () => (
+  <div className="loader-container">
+    <div className="spinner"></div>
+    <p>Loading, please wait...</p>
+  </div>
+);
+
+
+const IntroPage = React.lazy(() => import('./components/Intro'));
+const Home = React.lazy(() => import('./components/Home'));
+const EndPage = React.lazy(() => import('./components/EndPage'));
 
 const App = () => {
   return (
@@ -13,12 +24,13 @@ const App = () => {
         v7_relativeSplatPath: true,  // Enable relative splat path resolution
       }}
     >
-      <Analytics />
-      <Routes>
-        <Route path="/" element={<IntroPage />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/end" element={<EndPage />} />
-      </Routes>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<IntroPage />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/end" element={<EndPage />} />
+        </Routes>
+      </Suspense>
     </Router>
   );
 };

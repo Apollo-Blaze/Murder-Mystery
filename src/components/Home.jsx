@@ -196,56 +196,83 @@ const Home = () => {
     return (
         <>
          {/* Navbar */}
-         {!isLoading &&(<nav className="z-100 bg-gray-800 text-white p-4 fixed z-40 w-full ">
-                    <div className="flex justify-between items-center">
-                        <div className="text-2xl font-bold">Ravenswood Murder</div>
+         <motion.nav
+                className="z-100 bg-gray-800 text-white p-4 fixed z-40 w-full"
+                initial={{ opacity: 0, y: -60 }} // Initial state before loading
+                animate={{
+                    opacity: isLoading ? 0.5 : 1, // Animate opacity while loading
+                    y: isLoading ? -90 : 0, // Slight movement when loading
+                }}
+                exit={{
+                    opacity: 0,
+                    y: -50,
+                }} // Exit animation
+                transition={{ duration: 0.3 }} // Adjust speed of transition
+            >
+                <div className="flex justify-between items-center">
+                    <div className="text-2xl font-bold">Ravenswood Murder</div>
 
-                        {/* Desktop Menu */}
-                        <ul className="hidden sm:flex space-x-4">
-                            {locations.map((loc) => (
-                                <li key={loc}>
-                                    <Link
-                                        to="#"
-                                        onClick={() => changeLocation(loc)}
-                                        className={`px-3 py-2 rounded-md transition-all duration-200 ${
-                                            location === loc ? 'text-red-700 font-bold' : 'hover:text-gray-300 '
-                                        }`}
-                                    >
-                                        {loc.charAt(0).toUpperCase() + loc.slice(1)}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
+                    {/* Desktop Menu */}
+                    <ul className="hidden sm:flex space-x-4">
+                        {locations.map((loc) => (
+                            <li key={loc}>
+                                <Link
+                                    to="#"
+                                    onClick={() => changeLocation(loc)}
+                                    className={`px-3 py-2 rounded-md transition-all duration-700 ${
+                                        location === loc
+                                            ? "text-red-700 font-bold"
+                                            : "hover:text-gray-300"
+                                    }`}
+                                >
+                                    {loc.charAt(0).toUpperCase() + loc.slice(1)}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
 
-                        {/* Mobile Menu Toggle */}
-                        <button
-                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="sm:hidden text-2xl bg-transparent"
-                        >
-                            ☰
-                        </button>
-                    </div>
+                    {/* Mobile Menu Toggle */}
+                    <button
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        className="sm:hidden text-2xl bg-transparent"
+                    >
+                        ☰
+                    </button>
+                </div>
 
-                    {/* Mobile Menu */}
+                {/* Mobile Menu with expanding/contracting animation */}
+                <AnimatePresence>
                     {isMobileMenuOpen && (
-                        <div className="sm:hidden bg-gray-800 p-2">
+                        <motion.div
+                            className="sm:hidden bg-gray-800 p-2"
+                            initial={{ opacity: 0, height: 0 }} // Start with 0 height and hidden
+                            animate={{
+                                opacity: 1, 
+                                height: "auto", // Expand to the content's natural height
+                            }}
+                            exit={{
+                                opacity: 0,
+                                height: 0, // Contract to 0 height
+                            }}
+                            transition={{ duration: 0.3 }} // Duration of the animation
+                        >
                             {locations.map((loc) => (
                                 <Link
                                     key={loc}
                                     to="#"
                                     onClick={() => {
                                         changeLocation(loc);
-                                        setIsMobileMenuOpen(false);
+                                        setIsMobileMenuOpen(false); // Close the mobile menu after clicking
                                     }}
-                                    className="block px-3 py-2 rounded-md transition-all duration-200 hover:bg-gray-700"
+                                    className="block px-3 py-2 rounded-md transition-all duration-700 hover:bg-gray-700"
                                 >
                                     {loc.charAt(0).toUpperCase() + loc.slice(1)}
                                 </Link>
                             ))}
-                        </div>
+                        </motion.div>
                     )}
-                </nav>)}
-                
+                </AnimatePresence>
+            </motion.nav>
 
                 <div className={`relative z-0 ${showForensic ? `bg-${location}` : `bg-${location}-f`} bg-cover min-h-fit bg-center px-4`}>
                 {isLoading && (
@@ -266,7 +293,14 @@ const Home = () => {
                     {/* Character Selection and Controls */}
                     {showControls && (
                         <>
-                            <div className="flex flex-col sm:flex-row gap-4 mb-6 px-8 py-4 w-fit rounded-3xl mt-12 sm:mt-0 md:mt-10 md:px-10 md:py-8"
+                            {/* Input and Action Buttons */}
+                            <AnimatePresence>
+                            <motion.div 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1}}
+                            exit={{ opacity: 0}}
+                            transition={{ duration: 0.5 }}
+                            className="flex flex-col sm:flex-row gap-4 mb-6 px-8 py-4 w-fit rounded-3xl mt-12 sm:mt-0 md:mt-10 md:px-10 md:py-8"
                                 style={{ backgroundColor: 'rgba(72, 72, 92, 0.8)' }}
                             >
                                 {['Alice', 'Bob', 'Clara'].map((suspect) => (
@@ -277,11 +311,132 @@ const Home = () => {
                                         selected={selectedSuspect === suspect}
                                     />
                                 ))}
-                            </div>
-
-                            
-                            {/* Notepad Modal */}
+                            </motion.div>
+                            </AnimatePresence>
                             <AnimatePresence>
+                    
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1}}
+                            exit={{ opacity: 0}}
+                            transition={{ duration: 0.5 }}
+                            className="flex flex-col items-center justify-center bg-gray-800 px-6 py-6 md:px-10 md:py-10 rounded-xl max-w-full max-h-fit"
+                        >
+                            
+                            <div className="flex flex-wrap items-center gap-4 w-full max-w-2xl justify-center">
+                                <input
+                                    type="text"
+                                    value={userInput}
+                                    onChange={handleUserInputChange}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') handleSubmitInput();
+                                    }}
+                                    placeholder="Ask a question..."
+                                    className="flex-grow px-4 py-2 border rounded-md text-white bg-gray-700 placeholder-gray-400 focus:outline-none w-auto"
+                                />
+                                <button
+                                    onClick={handleSpeechToText}
+                                    disabled={isListening}
+                                    className="px-2 py-2 bg-transparent text-white rounded-2xl text-2xl -ml-2 -mr-2"
+                                >
+                                    {isListening ? 'Listening...' : '🎙️'}
+                                </button>
+                                <ActionButton onClick={handleSubmitInput} text="Interrogate" />
+                                <button
+                                    onClick={openModal}
+                                    disabled={!clues.death || !clues.guest || !clues.locket}  // Disable button if any clue is missing
+                                    className={`px-4 py-2 rounded-md ${
+                                        `killerChosen || !clues.death || !clues.guest || !clues.locket`
+                                            ? 'bg-gray-500 cursor-not-allowed'
+                                            : 'bg-red-500 hover:bg-red-700 text-white'
+                                    }`}
+                                >
+                                    Choose Killer
+                                </button>
+                            </div>
+                        </motion.div>
+                        </AnimatePresence>
+                        <AnimatePresence>
+                        <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1}}
+                        exit={{ opacity: 0}}
+                        transition={{ duration: 0.5 }}
+                        className="flex justify-center mt-4 w-full">
+                        <div
+                            className="typing-response-container font-semibold text-black bg-slate-100 p-4 rounded-3xl w-full max-w-3xl border-black border-4 overflow-y-auto max-h-64 break-words whitespace-pre-wrap custom-scrollbar"
+                            style={{ minHeight: '3rem', marginBottom: '4rem' }}
+                        >
+                            <p>{displayedResponse || 'Start interrogating the suspects...'}</p>
+                        </div>
+                    </motion.div>
+                    
+                </AnimatePresence>
+                        </>)}               
+                </div>
+
+                {/* Modal for Killer Choice */}
+                {isModalOpen && (
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                        <div className="bg-gray-800 p-6 rounded-md shadow-lg">
+                            <h2 className="text-xl mb-4">Choose the Killer</h2>
+                            <div className="flex gap-7 mb-6">
+                                {['Alice', 'Bob', 'Clara'].map((suspect) => (
+                                    <button
+                                        key={suspect}
+                                        onClick={() => handleKillerChoice(suspect)}
+                                        className={`px-4 py-2 rounded-md ${chosenKiller === suspect ? 'bg-red-500 text-white' : 'hover:bg-gray-900'}`}
+                                    >
+                                        {suspect}
+                                    </button>
+                                ))}
+                            </div>
+                            <button onClick={submitKillerChoice} className="px-6 py-2 bg-green-500 text-white rounded-md">Submit</button>
+                            <button onClick={closeModal} className="ml-4 px-6 py-2 bg-gray-300 text-black rounded-md">Cancel</button>
+                        </div>
+                    </div>
+                )}
+                {/* Toggle Button */}
+                {!isMobileMenuOpen && (<div className="fixed top-24 right-4 sm:top-20 sm:right-8 z-40">
+                    <button
+                        onClick={() => setShowControls(!showControls)}
+                        className="px-4 py-2 bg-blue-500 bg-opacity-60 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
+                    >
+                        {showControls ? 'Hide Controls' : 'Show Controls'}
+                    </button>
+                    
+                </div>)}
+                {!isMobileMenuOpen && (<div className="fixed top-36 right-4 sm:top-32 sm:right-8 z-40">
+                    <button
+                    onClick={() => {
+                        setshowForensic(!showForensic);
+                        setShowControls(!showControls);
+                    }}
+                    className="px-4 py-4 bg-blue-500 bg-opacity-60 text-white rounded-3xl shadow-md hover:bg-blue-600 transition duration-300"
+                    >
+                    {showForensic ? '🔦' : '❌'}
+                    </button>
+                 
+                </div>
+                )}
+                <AnimatePresence>
+                {showControls && (<motion.button
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1}}
+                                exit={{ opacity: 0}}
+                                transition={{ duration: 0.5 }}
+                                onClick={toggleNotepad}
+                                className="px-4 py-4 bg-blue-500 bg-opacity-70 text-white rounded-3xl shadow-md hover:bg-red-600 transition duration-300 fixed top-52 right-4 sm:top-48 sm:right-8 z-40"
+                            >
+                                📒
+                            </motion.button>)}</AnimatePresence>
+                <button
+                    onClick={togglePlayPause}
+                    className="fixed bottom-8 right-8 bg-gray-800 text-white p-4 rounded-3xl shadow-md focus:outline-none opacity-70 hover:opacity-95"
+                >
+                    {isPlaying ? '🎧' : '🔇'}
+                </button>
+                <AnimatePresence>
                                 {isNotepadOpen && (
                                     <motion.div
                                     initial={{ opacity: 0 }}
@@ -338,108 +493,6 @@ const Home = () => {
                                     </motion.div>
                                 )}
                                 </AnimatePresence>
-
-                            {/* Input and Action Buttons */}
-                            <div className="flex flex-col items-center justify-center bg-gray-800 px-6 py-6 md:px-10 md:py-10 rounded-xl max-w-full max-h-fit">
-                            <div className="flex flex-wrap items-center gap-4 w-full max-w-2xl justify-center"> {/* Added justify-between */}
-                                <input
-                                    type="text"
-                                    value={userInput}
-                                    onChange={handleUserInputChange}
-                                    onKeyDown={(e) => {
-                                        if (e.key === 'Enter') handleSubmitInput();
-                                    }}
-                                    placeholder="Ask a question..."
-                                    className="flex-grow px-4 py-2 border rounded-md text-white bg-gray-700 placeholder-gray-400 focus:outline-none w-auto "
-                                />
-                                <button
-                                    onClick={handleSpeechToText}
-                                    disabled={isListening}
-                                    className=" px-2 py-2 bg-indigo-600 text-white rounded-2xl"
-                                >
-                                    {isListening ? 'Listening...' : '🎙️'}
-                                </button>
-                                <ActionButton onClick={handleSubmitInput} text="Interrogate" />
-                                <button
-                                    onClick={openModal}
-                                    disabled={!clues.death || !clues.guest || !clues.locket}  // Disable button if any clue is missing
-                                    className={`px-4 py-2 rounded-md ${
-                                        killerChosen || !clues.death || !clues.guest || !clues.locket
-                                            ? 'bg-gray-500 cursor-not-allowed'
-                                            : 'bg-red-500 hover:bg-red-700 text-white'
-                                    }`}
-                                >
-                                    Choose Killer
-                                </button>
-                            </div>
-                        </div>
-
-                        </>
-                    )}
-
-                    {/* Typing Effect Response */}
-                    {showControls && (<div className="flex justify-center mt-4 w-full">
-                        <div
-                            className="typing-response-container font-semibold text-black bg-slate-100 p-4 rounded-3xl w-full max-w-3xl border-black border-4 overflow-y-auto max-h-64 break-words whitespace-pre-wrap custom-scrollbar"
-                            style={{ minHeight: '3rem', marginBottom: '4rem' }}
-                        >
-                            <p>{displayedResponse || 'Start interrogating the suspects...'}</p>
-                        </div>
-                    </div>)}
-                </div>
-
-                {/* Modal for Killer Choice */}
-                {isModalOpen && (
-                    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                        <div className="bg-gray-800 p-6 rounded-md shadow-lg">
-                            <h2 className="text-xl mb-4">Choose the Killer</h2>
-                            <div className="flex gap-7 mb-6">
-                                {['Alice', 'Bob', 'Clara'].map((suspect) => (
-                                    <button
-                                        key={suspect}
-                                        onClick={() => handleKillerChoice(suspect)}
-                                        className={`px-4 py-2 rounded-md ${chosenKiller === suspect ? 'bg-red-500 text-white' : 'hover:bg-gray-900'}`}
-                                    >
-                                        {suspect}
-                                    </button>
-                                ))}
-                            </div>
-                            <button onClick={submitKillerChoice} className="px-6 py-2 bg-green-500 text-white rounded-md">Submit</button>
-                            <button onClick={closeModal} className="ml-4 px-6 py-2 bg-gray-300 text-black rounded-md">Cancel</button>
-                        </div>
-                    </div>
-                )}
-                {/* Toggle Button */}
-                {!isMobileMenuOpen && (<div className="fixed top-24 right-4 sm:top-20 sm:right-8 z-40">
-                    <button
-                        onClick={() => setShowControls(!showControls)}
-                        className="px-4 py-2 bg-blue-500 bg-opacity-60 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
-                    >
-                        {showControls ? 'Hide Controls' : 'Show Controls'}
-                    </button>
-                    
-                </div>)}
-                {!isMobileMenuOpen && (<div className="fixed top-36 right-4 sm:top-32 sm:right-8 z-40">
-                    <button
-                        onClick={() => setshowForensic(!showForensic)}
-                        className="px-4 py-4 bg-blue-500 bg-opacity-60 text-white rounded-3xl shadow-md hover:bg-blue-600 transition duration-300"
-                    >
-                        {showForensic ? '🔦' : '❌'}
-                    </button>                    
-                </div>
-                )}
-                {showControls && (<button
-                                onClick={toggleNotepad}
-                                className="px-4 py-4 bg-blue-500 bg-opacity-70 text-white rounded-3xl shadow-md hover:bg-red-600 transition duration-300 fixed top-52 right-4 sm:top-48 sm:right-8 z-40"
-                            >
-                                📒
-                            </button>)}
-                <button
-                    onClick={togglePlayPause}
-                    className="fixed bottom-8 right-8 bg-gray-800 text-white p-4 rounded-3xl shadow-md focus:outline-none opacity-70 hover:opacity-95"
-                >
-                    {isPlaying ? '🎧' : '🔇'}
-                </button>
             </div>
         </>
     );
