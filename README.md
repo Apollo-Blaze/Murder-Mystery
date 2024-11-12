@@ -13,6 +13,7 @@ The goal of this project is to create an immersive and interactive murder myster
 - **Use clues from a dynamic notepad** to help solve the mystery and choose the killer.
 - **Engage in conversations with suspects** powered by a Python-based NLP chatbot, which helps uncover hidden information and secrets.
 - **Utilize forensic analysis** to examine the crime scene in detail and uncover hidden evidence.
+- **Use Speech-to-Text** (STT) functionality to transcribe your spoken questions and responses with suspects.
 
 ### New Features:
 - **Notepad**: A handy tool that keeps track of clues discovered throughout the game.
@@ -20,6 +21,7 @@ The goal of this project is to create an immersive and interactive murder myster
 - **Unlockable Clues**: As users progress, more clues become available in the chat history, allowing them to piece together the mystery.
 - **Music**: Background music enhances the atmosphere, adding suspense during key moments.
 - **Forensic Analysis**: An investigative tool that reveals forensic details about the crime scene, adding depth to the evidence available.
+- **Speech-to-Text**: Transcribe your voice into text to ask questions and interact with suspects.
 - **Responsiveness**: The game is fully responsive, ensuring a seamless experience on both desktop and mobile devices.
 
 ---
@@ -62,6 +64,11 @@ The goal of this project is to create an immersive and interactive murder myster
    - Background music plays during key moments to enhance the atmosphere.
    - Music dynamically adjusts to match the mood of the investigation, building suspense as you move through the mystery.
 
+### 9. **Speech-to-Text**:
+   - **Transcribe your voice** into text to ask questions and get responses from suspects.
+   - Use the STT feature to interact with the chatbot and gather clues without typing, making the game more immersive.
+   - The speech-to-text functionality is powered by browser-based APIs, making it accessible directly from your device.
+
 ---
 
 ## 🛠️ Tools and Technologies Used
@@ -81,6 +88,7 @@ The goal of this project is to create an immersive and interactive murder myster
 - **Forensic Analysis**: Allows in-depth examination of the crime scene for forensic details.
 - **Loading States**: Animated loading screens that provide a seamless transition between scenes and maintain user engagement.
 - **Responsiveness**: Fully responsive design using Tailwind CSS, ensuring compatibility across devices.
+- **Speech-to-Text**: A new way to interact with the game by transcribing spoken words to text.
 
 ---
 
@@ -110,6 +118,10 @@ The goal of this project is to create an immersive and interactive murder myster
 6. **Background Music**:
    - Suspenseful and atmospheric background music sets the mood as players investigate.
    - Music changes dynamically based on the current location or event.
+
+7. **Speech-to-Text (STT)**:
+   - Use the Speech-to-Text feature to speak directly to the chatbot and uncover clues.
+   - The STT functionality adds immersion by allowing players to directly speak their questions instead of typing them.
 
 ---
 
