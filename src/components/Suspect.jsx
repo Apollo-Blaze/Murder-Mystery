@@ -15,7 +15,7 @@ const Suspect = ({ name, onClick, selected }) => {
   return (
     <motion.div
       className={`relative mt-4 mb-4 rounded-3xl overflow-hidden flex flex-col items-center min-h-96 max-w-72 max-h-96 min-w-72 cursor-pointer pb-0 pt-9 
-        ${selected ? 'border-4 border-white bg-gray-800' : ''}`}
+        ${selected ? 'border-4 border-white bg-slate-900' : ''}`}
       onClick={() => onClick(name)}
       initial={{ scale: 1 }}
       animate={{ scale: selected ? 1.1 : 1 }}
