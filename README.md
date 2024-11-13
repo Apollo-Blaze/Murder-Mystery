@@ -28,56 +28,6 @@ The goal of this project is to create an immersive and interactive murder myster
 
 ---
 
-## 🎨 Key Features
-
-### 1. **Location Navigation**:
-   - Explore various locations (e.g., dining room, kitchen, study, garden) each containing unique clues.
-   - Use **React Router** to navigate smoothly between different rooms and areas in the mansion.
-
-### 2. **Clickable Suspects**:
-   - Click on suspects (e.g., Alice, Bob, Clara) to start an investigation.
-   - Each suspect has a **unique alibi**, **motive**, and **background story**.
-   - Investigate suspects through interactive chat with a bot powered by Python’s **NLTK and Keras**.
-
-### 3. **Chatbot Interaction**:
-   - Ask suspects questions and receive responses that reveal important clues.
-   - Use the chatbot to unlock secrets, uncover hidden motivations, and piece together alibis.
-   - All chat interactions are saved, allowing you to track the progress of your investigation.
-
-### 4. **Forensic Analysis**:
-   - Examine the crime scene using forensic analysis tools to find hidden evidence.
-   - Provides details about fingerprints, blood samples, and other forensic evidence.
-   - This feature enriches the game by offering detailed evidence that can help identify the killer.
-
-### 5. **Notepad**:
-   - Keep track of discovered clues with a **dynamic notepad**.
-   - As users uncover new information, clues are added to the notepad, and the player can access them anytime during their investigation.
-   - Clues are linked to specific locations or suspects, aiding in the process of identifying the killer.
-
-### 6. **Unlockable Clues**:
-   - Clues become unlocked progressively as the user interrogates suspects and explores locations.
-   - Unlock hidden details about suspects and rooms to form connections and narrow down the potential killer.
-
-### 7. **Choosing the Killer**:
-   - After gathering enough clues, users can make a **one-time decision** on who they believe is the killer.
-   - Make your choice and solve the mystery based on all the gathered evidence.
-
-### 8. **Music & Sound**:
-   - Background music plays during key moments to enhance the atmosphere.
-   - Music dynamically adjusts to match the mood of the investigation, building suspense as you move through the mystery.
-
-### 9. **Speech-to-Text**:
-   - **Transcribe your voice** into text to ask questions and get responses from suspects.
-   - Use the STT feature to interact with the chatbot and gather clues without typing, making the game more immersive.
-   - The speech-to-text functionality is powered by browser-based APIs, making it accessible directly from your device.
-
-### 10. **Toast Notifications**:
-   - **Instant feedback** on game events such as discovering clues, interacting with suspects, or unlocking new areas.
-   - Notifications appear on the screen and provide timely updates, helping players stay informed and engaged in the investigation.
-   - The notifications are styled with Tailwind CSS to match the overall theme and feel of the game.
-
----
-
 ## 🛠️ Tools and Technologies Used
 
 ### Frontend:
@@ -91,17 +41,9 @@ The goal of this project is to create an immersive and interactive murder myster
 - **Python**: A Python file uses **Natural Language Processing (NLP)** to power a chatbot that responds to user interactions, providing clues and alibi details.
 - **Flask/Django**: Can be used to handle backend requests and serve the chatbot responses.
 
-### New Features:
-- **Notepad System**: A feature to dynamically display and save clues discovered by the user.
-- **Forensic Analysis**: Allows in-depth examination of the crime scene for forensic details.
-- **Loading States**: Animated loading screens that provide a seamless transition between scenes and maintain user engagement.
-- **Responsiveness**: Fully responsive design using Tailwind CSS, ensuring compatibility across devices.
-- **Speech-to-Text**: A new way to interact with the game by transcribing spoken words to text.
-- **Toast Notifications**: Instant feedback on game actions and events.
-
 ---
 
-## 🌐 How It Works
+## 🎨 Key Features
 
 1. **User Navigation**:
    - Users begin the game in a default location (e.g., the study).
@@ -135,6 +77,16 @@ The goal of this project is to create an immersive and interactive murder myster
    - Use the Speech-to-Text feature to speak directly to the chatbot and uncover clues.
    - The STT functionality adds immersion by allowing players to directly speak their questions instead of typing them.
 
+8. **Toast Notifications**:
+   - **Instant feedback** on game events such as discovering clues, interacting with suspects, or unlocking new areas.
+   - Notifications appear on the screen and provide timely updates, helping players stay informed and engaged in the investigation.
+   - The notifications are styled with Tailwind CSS to match the overall theme and feel of the game.
+
+9. **Notepad**:
+   - Keep track of discovered clues with a **dynamic notepad**.
+   - As users uncover new information, clues are added to the notepad, and the player can access them anytime during their investigation.
+   - Clues are linked to specific locations or suspects, aiding in the process of identifying the killer.
+
 ---
 
 ## 🐞 Current Bugs to Be Fixed
@@ -161,3 +113,4 @@ Watch the interactive gameplay in action!
 ---
 
 Feel free to explore, investigate, and most importantly—**solve the mystery**!
+
