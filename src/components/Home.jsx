@@ -5,6 +5,9 @@ import Suspect from "./Suspect.jsx";
 import ActionButton from "./ActionButton.jsx";
 import "../App.css";
 import Music from "../assets/music.mp3";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const Home = () => {
   const [location, setLocation] = useState("garden"); // default location
@@ -155,35 +158,35 @@ const Home = () => {
           setDisplayedResponse(""); // Reset displayed response for typing effect
 
           // Check if the response contains any clue keywords and update the state
-          if (data.response.includes("locket")) {
+          if (data.response.includes("locket") && !clues.locket) {
             setClues((prevClues) => ({ ...prevClues, locket: true }));
+            toast("New Clue Unlocked: Locket found!");
           }
-          if (data.response.includes("10")) {
+          if (data.response.includes("10") && !clues.death) {
             setClues((prevClues) => ({ ...prevClues, death: true }));
+            toast("New Clue Unlocked: Death timing discovered!");
           }
-          if (data.response.includes("9")) {
+          if (data.response.includes("9") && !clues.guest) {
             setClues((prevClues) => ({ ...prevClues, guest: true }));
+            toast("New Clue Unlocked: Guest details revealed!");
           }
           if (
-            data.response.includes(
-              "shoe" ||
-                "shoes" ||
-                "print" ||
-                "shoeprint" ||
-                "foot" ||
-                "footprint",
-            )
+            data.response.includes("shoe" ||"shoeprint"||"print"||"muddy"||"footprint") && !clues.kitchen
           ) {
             setClues((prevClues) => ({ ...prevClues, kitchen: true }));
+            toast("New Clue Unlocked: Shoeprints in the kitchen!");
           }
-          if (data.response.includes("frame")) {
+          if (data.response.includes("frame" && "broken") && !clues.frame) {
             setClues((prevClues) => ({ ...prevClues, frame: true }));
+            toast("New Clue Unlocked: Broken frame found!");
           }
-          if (data.response.includes("glass")) {
+          if (data.response.includes("glass") && !clues.glass) {
             setClues((prevClues) => ({ ...prevClues, glass: true }));
+            toast("New Clue Unlocked: Glass shards discovered!");
           }
-          if (data.response.includes("outside" && "kitchen")) {
+          if (data.response.includes("outside") && data.response.includes("kitchen") && !clues.outside) {
             setClues((prevClues) => ({ ...prevClues, outside: true }));
+            toast("New Clue Unlocked: Evidence outside the kitchen!");
           }
         })
         .catch((error) => {
@@ -215,6 +218,16 @@ const Home = () => {
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000} // Customize auto close time if needed
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeButton={true}
+        pauseOnHover={false}
+        theme="dark" // Apply dark theme
+        style={{ zIndex: 9999 }} // Ensure it's displayed above other content
+      />
       {/* Navbar */}
       <motion.nav
         className="z-100 bg-neutral-900 text-white p-4 fixed z-40 w-full"
