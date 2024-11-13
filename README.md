@@ -141,7 +141,8 @@ The goal of this project is to create an immersive and interactive murder myster
 
 - **Audio Clipping**: In some scenarios, the background music may overlap or stop unexpectedly. This is particularly noticeable when transitioning between rooms.
 - **Speech-to-Text Accuracy**: The Speech-to-Text feature occasionally misinterprets certain words, especially with accents or unclear pronunciation.
-- **Output Inaccuracy during Toast**: Sometimes there are typos when clues are unlocked and the toast message pops up
+- **Output Inaccuracy during Toast**: Sometimes there are typos when clues are unlocked and the toast message pops up.
+- **Forensic Logic**: There is a logical error in hiding controls when clicking the Forensics button. 
 
 ---
 
