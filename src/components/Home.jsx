@@ -217,7 +217,7 @@ const Home = () => {
     <>
       {/* Navbar */}
       <motion.nav
-        className="z-100 bg-gray-800 text-white p-4 fixed z-40 w-full"
+        className="z-100 bg-neutral-900 text-white p-4 fixed z-40 w-full"
         initial={{ opacity: 0, y: -60 }} // Initial state before loading
         animate={{
           opacity: isLoading ? 0.5 : 1, // Animate opacity while loading
@@ -264,7 +264,7 @@ const Home = () => {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              className="sm:hidden bg-gray-800 p-2"
+              className="sm:hidden bg-neutral-900 p-2"
               initial={{ opacity: 0, height: 0 }} // Start with 0 height and hidden
               animate={{
                 opacity: 1,
@@ -338,7 +338,7 @@ const Home = () => {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="flex flex-col items-center justify-center bg-gray-800 px-6 py-6 md:px-10 md:py-10 rounded-xl max-w-full max-h-fit"
+                  className="flex flex-col items-center justify-center bg-neutral-900 px-6 py-6 md:px-10 md:py-10 rounded-xl max-w-full max-h-fit"
                 >
                   <div className="flex flex-wrap items-center gap-4 w-full max-w-2xl justify-center">
                     <input
@@ -349,7 +349,7 @@ const Home = () => {
                         if (e.key === "Enter") handleSubmitInput();
                       }}
                       placeholder="Ask a question..."
-                      className="flex-grow px-4 py-2 border rounded-md text-white bg-gray-700 placeholder-gray-400 focus:outline-none w-auto"
+                      className="flex-grow px-4 py-2 border-black focus:border-white rounded-full text-white bg-gray-700 placeholder-gray-400 focus:outline-offset-4 w-auto"
                     />
                     <button
                       onClick={handleSpeechToText}
@@ -389,7 +389,7 @@ const Home = () => {
                 >
                   <div
                     className="typing-response-container font-semibold text-black bg-slate-100 p-4 rounded-3xl w-full max-w-3xl border-black border-4 overflow-y-auto max-h-64 break-words whitespace-pre-wrap custom-scrollbar"
-                    style={{ minHeight: "3rem", marginBottom: "4rem" }}
+                    style={{ minHeight: "3rem", marginBottom: "1rem" }}
                   >
                     <p>
                       {displayedResponse ||
@@ -398,11 +398,12 @@ const Home = () => {
                   </div>
                 </motion.div>
               </AnimatePresence>
-            </>
-          )}
-          <div className="absolute bottom-4 w-full text-center text-white">
+              <div className="sticky w-full text-center text-white mb-4">
             <p className="text-sm opacity-75">Developed by Apollo Blaze.</p>
           </div>
+            </>
+          )}
+          
         </div>
 
         {/* Modal for Killer Choice */}
@@ -441,7 +442,7 @@ const Home = () => {
           <div className="fixed top-24 right-4 sm:top-20 sm:right-8 z-40">
             <button
               onClick={() => setShowControls(!showControls)}
-              className="px-4 py-2 bg-blue-500 bg-opacity-60 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
+              className="px-4 py-2 bg-neutral-900 bg-opacity-60 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
             >
               {showControls ? "Hide Controls" : "Show Controls"}
             </button>
@@ -454,7 +455,7 @@ const Home = () => {
                 setshowForensic(!showForensic);
                 setShowControls(!showControls);
               }}
-              className="px-4 py-4 bg-blue-500 bg-opacity-60 text-white rounded-3xl shadow-md hover:bg-blue-600 transition duration-300"
+              className="px-4 py-4 bg-neutral-900 bg-opacity-60 text-white rounded-3xl shadow-md hover:bg-blue-600 transition duration-300"
             >
               {showForensic ? "🔦" : "❌"}
             </button>
@@ -468,7 +469,7 @@ const Home = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
               onClick={toggleNotepad}
-              className="px-4 py-4 bg-blue-500 bg-opacity-70 text-white rounded-3xl shadow-md hover:bg-red-600 transition duration-300 fixed top-52 right-4 sm:top-48 sm:right-8 z-40"
+              className="px-4 py-4 bg-neutral-900 bg-opacity-70 text-white rounded-3xl shadow-md hover:bg-red-600 transition duration-300 fixed top-52 right-4 sm:top-48 sm:right-8 z-40"
             >
               📒
             </motion.button>
@@ -476,7 +477,7 @@ const Home = () => {
         </AnimatePresence>
         <button
           onClick={togglePlayPause}
-          className="fixed bottom-8 right-8 bg-gray-800 text-white p-4 rounded-3xl shadow-md focus:outline-none opacity-70 hover:opacity-95"
+          className="fixed bottom-8 right-8 bg-neutral-900 text-white p-4 rounded-3xl shadow-md focus:outline-none opacity-70 hover:opacity-95"
         >
           {isPlaying ? "🎧" : "🔇"}
         </button>
@@ -531,7 +532,7 @@ const Home = () => {
                 </ul>
                 <button
                   onClick={toggleNotepad}
-                  className="mt-4 px-6 py-2 bg-gray-700 text-white rounded-md hover:bg-red-600"
+                  className="mt-4 px-6 py-2 bg-neutral-900 text-white rounded-md hover:bg-red-600"
                 >
                   Close
                 </button>
