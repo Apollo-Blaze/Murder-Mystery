@@ -46,7 +46,7 @@ The goal of this project is to create an immersive and interactive murder myster
 ## 🎨 Key Features
 
 1. **User Navigation**:
-   - Users begin the game in a default location (e.g., the study).
+   - Users begin the game in a default location.
    - They can use a menu bar styled with a **dark purple, slightly transparent background** to navigate to different rooms.
    - Each room contains important clues related to the murder.
 
