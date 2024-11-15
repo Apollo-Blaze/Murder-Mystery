@@ -36,6 +36,8 @@ const Home = () => {
   const [showForensic, setshowForensic] = useState(true);
   const [isListening, setIsListening] = useState(false);
 
+
+
   const handleSpeechToText = () => {
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -69,11 +71,18 @@ const Home = () => {
   const toggleNotepad = () => {
     setIsNotepadOpen(!isNotepadOpen);
   };
+
   useEffect(() => {
-    audioRef.current.play();
-    audioRef.current.loop = true;
+    const audio = audioRef.current;
+    audio.play();
+    audio.loop = false;
     setIsPlaying(true);
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+    };
   }, []);
+
 
   const togglePlayPause = () => {
     if (isPlaying) {
@@ -84,6 +93,8 @@ const Home = () => {
     setIsPlaying(!isPlaying);
   };
 
+
+
   const locations = [
     "garden",
     "diningRoom",
@@ -92,6 +103,8 @@ const Home = () => {
     "library",
     "balcony",
   ];
+
+
   const navigate = useNavigate();
 
   const changeLocation = (newLocation) => {
@@ -198,6 +211,7 @@ const Home = () => {
     }
     setUserInput("");
   };
+
   // Typing effect
   useEffect(() => {
     if (response) {
@@ -215,6 +229,7 @@ const Home = () => {
       return () => clearInterval(typingInterval);
     }
   }, [response]);
+  
 
   return (
     <>
@@ -243,7 +258,7 @@ const Home = () => {
         transition={{ duration: 0.3 }} // Adjust speed of transition
       >
         <div className="flex justify-between items-center">
-          <div className="text-2xl font-bold">Ravenswood Murder</div>
+          <div className="text-2xl font-bold">Ravenswood Case</div>
 
           {/* Desktop Menu */}
           <ul className="hidden sm:flex space-x-4">

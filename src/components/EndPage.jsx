@@ -64,7 +64,14 @@ const EndPage = () => {
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="bg-black bg-opacity-90 p-8 rounded-3xl text-center text-white min-w-[300px] max-w-2xl max-h-[70vh] overflow-y-auto custom-scrollbar">
           <h1 className="text-4xl font-bold mb-4">Game Over</h1>
-          <p className="text-lg mb-6">{message}</p>
+          <p
+  className={`text-lg mb-6 ${
+    killerName ? 'text-green-500' : 'text-red-500'
+  }`}
+>
+  {message}
+</p>
+
 
           {/* Story Reveal Section */}
           <div className="text-left text-white mt-6 space-y-4">
