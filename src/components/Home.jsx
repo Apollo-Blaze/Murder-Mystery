@@ -480,8 +480,17 @@ const Home = () => {
           <div className="fixed top-36 right-4 sm:top-32 sm:right-8 z-40">
             <button
               onClick={() => {
+                console.log(showForensic)
+                console.log(showControls)
+                if (showForensic===true && showControls===false){setshowForensic(!showForensic)}
+                else if (showForensic===true && showControls===false){setshowForensic(!showForensic)}
+                else if (showForensic===false && showControls===true){setshowForensic(!showForensic)}
+                else{
                 setshowForensic(!showForensic);
-                setShowControls(!showControls);
+                setShowControls(!showControls)
+                }
+                
+                
               }}
               className="px-4 py-4 bg-neutral-900 bg-opacity-60 text-white rounded-3xl shadow-md hover:bg-blue-600 transition duration-300"
             >
