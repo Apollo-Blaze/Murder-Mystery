@@ -92,7 +92,7 @@ const EndPage = () => {
               </div>
             ))}
             <p className="text-sm opacity-80 mt-4">
-              Clara's alibi didn't match the timeline. She claimed to be in the kitchen preparing dessert, but witnesses placed her elsewhere and her perfume scent was found near the crime scene. The timeline of events proved her guilt.
+              Clara's alibi didn't match the timeline. She claimed to be talking to the guest at 10PM, when the party ended at 9PM. The timeline of events along with her locket proved her guilt.
             </p>
           </div>
 
