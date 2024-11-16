@@ -157,7 +157,7 @@ const Home = () => {
 
   const handleSubmitInput = () => {
     if (selectedSuspect && userInput) {
-      fetch("https://srichand.pythonanywhere.com/ask_character", {
+      fetch("https://murder-mystery-qnnb.onrender.com/ask_character", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -189,11 +189,11 @@ const Home = () => {
             setClues((prevClues) => ({ ...prevClues, kitchen: true }));
             toast("New Clue Unlocked: Shoeprints in the kitchen!");
           }
-          if (data.response.includes("frame" && "broken") && !clues.frame) {
+          if (data.response.includes("frame")  && data.response.includes("broken") && !clues.frame) {
             setClues((prevClues) => ({ ...prevClues, frame: true }));
             toast("New Clue Unlocked: Broken frame found!");
           }
-          if (data.response.includes("glass") && !clues.glass) {
+          if (data.response.includes("glass") && data.response.includes("broken") && !clues.glass) {
             setClues((prevClues) => ({ ...prevClues, glass: true }));
             toast("New Clue Unlocked: Glass shards discovered!");
           }
