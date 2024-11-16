@@ -157,7 +157,7 @@ const Home = () => {
 
   const handleSubmitInput = () => {
     if (selectedSuspect && userInput) {
-      fetch("https://murder-mystery-qnnb.onrender.com/ask_character", {
+      fetch("https://srichand.pythonanywhere.com/ask_character", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
