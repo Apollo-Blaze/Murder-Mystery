@@ -14,7 +14,6 @@ CORS(app)  # Allow Cross-Origin Requests
 gemini_api_key = os.getenv("GEMINI_API_KEY")
 # Pass the API key to configure the Google Generative AI library
 genai.configure(api_key=gemini_api_key)
-print(gemini_api_key)
 
 suspect_models = {
 
