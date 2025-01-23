@@ -3,6 +3,7 @@ import React,{ Suspense } from 'react';
 import './Loader.css'; // Import the CSS file for styling the loader
 import './App.css'
 import {Analytics} from '@vercel/analytics/react'
+import LandPage from './components/Land';
 
 const Loader = () => (
   <div className="loader-container">
@@ -28,9 +29,10 @@ const App = () => {
       <Analytics />
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="/" element={<IntroPage />} />
+        <Route path="/" element={<LandPage />} />
+          {/* <Route path="/" element={<IntroPage />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/end" element={<EndPage />} />
+          <Route path="/end" element={<EndPage />} /> */}
         </Routes>
       </Suspense>
     </Router>

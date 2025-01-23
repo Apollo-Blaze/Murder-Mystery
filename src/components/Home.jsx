@@ -16,6 +16,7 @@ const Home = () => {
   const [userInput, setUserInput] = useState(""); // Store the input from the user
   const [response, setResponse] = useState(""); // Full model response
   const [displayedResponse, setDisplayedResponse] = useState(""); // Typing effect response
+  const displayedResponseRef = useRef("");
   const [isModalOpen, setIsModalOpen] = useState(false); // Track if modal is open
   const [chosenKiller, setChosenKiller] = useState(""); // Store chosen killer
   const [showControls, setShowControls] = useState(true); // Track visibility of controls
@@ -23,6 +24,7 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false); // Loading state for location change
   const audioRef = useRef(new Audio(Music));
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isTimeReached, setIsTimeReached] = useState(false);
   const [clues, setClues] = useState({
     locket: false,
     death: false,
@@ -35,6 +37,43 @@ const Home = () => {
   const [isNotepadOpen, setIsNotepadOpen] = useState(false);
   const [showForensic, setshowForensic] = useState(true);
   const [isListening, setIsListening] = useState(false);
+
+  useEffect(() => {
+    if (response) {
+      let index = 0;
+      displayedResponseRef.current = ""; // Reset displayed response
+  
+      const typingInterval = setInterval(() => {
+        displayedResponseRef.current += response.charAt(index);
+        setDisplayedResponse(displayedResponseRef.current); // Update state periodically
+        index++;
+  
+        if (index >= response.length) {
+          clearInterval(typingInterval);
+        }
+      }, 50);
+  
+      return () => clearInterval(typingInterval);
+    }
+  }, [response]);
+
+  const checkTime = () => {
+    const now = new Date();
+    let nextMonday = new Date();
+    nextMonday.setDate(now.getDate() + ((8 - now.getDay()) % 7)); // Next Monday
+    nextMonday.setHours(18, 0, 0, 0); // 6:00 PM
+  
+    if (now >= nextMonday) {
+      setIsTimeReached(true);
+    }
+  };
+  
+  // Run the time check every second
+  useEffect(() => {
+    checkTime();
+    const timer = setInterval(checkTime, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
 
 
@@ -72,36 +111,13 @@ const Home = () => {
     setIsNotepadOpen(!isNotepadOpen);
   };
 
-  useEffect(() => {
-    const audio = audioRef.current;
-    audio.play();
-    audio.loop = false;
-    setIsPlaying(true);
-    return () => {
-      audio.pause();
-      audio.currentTime = 0;
-    };
-  }, []);
-
-
-  const togglePlayPause = () => {
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play();
-    }
-    setIsPlaying(!isPlaying);
-  };
-
-
-
   const locations = [
     "garden",
     "diningRoom",
     "kitchen",
-    "study",
-    "library",
-    "balcony",
+    // "study",
+    // "library",
+    // "balcony",
   ];
 
 
@@ -171,33 +187,33 @@ const Home = () => {
           setDisplayedResponse(""); // Reset displayed response for typing effect
 
           // Check if the response contains any clue keywords and update the state
-          if (data.response.includes("locket") && !clues.locket) {
+          if (data.response.toLowerCase().includes("locket") && !clues.locket) {
             setClues((prevClues) => ({ ...prevClues, locket: true }));
             toast("New Clue Unlocked: Locket found!");
           }
-          if (data.response.includes("10") && !clues.death) {
+          if (data.response.toLowerCase().includes("10"||"ten") && !clues.death) {
             setClues((prevClues) => ({ ...prevClues, death: true }));
             toast("New Clue Unlocked: Death timing discovered!");
           }
-          if (data.response.includes("9") && !clues.guest) {
+          if (data.response.toLowerCase().includes("9"||"nine") && !clues.guest) {
             setClues((prevClues) => ({ ...prevClues, guest: true }));
             toast("New Clue Unlocked: Guest details revealed!");
           }
           if (
-            data.response.includes("shoe" ||"shoeprint"||"print"||"muddy"||"footprint") && !clues.kitchen
+            data.response.toLowerCase().includes("shoe" ||"shoeprint"||"print"||"muddy"||"footprint") && !clues.kitchen
           ) {
             setClues((prevClues) => ({ ...prevClues, kitchen: true }));
             toast("New Clue Unlocked: Shoeprints in the kitchen!");
           }
-          if (data.response.includes("frame")  && data.response.includes("broken") && !clues.frame) {
+          if (data.response.toLowerCase().includes("frame")  && data.response.toLowerCase().includes("broken") && !clues.frame) {
             setClues((prevClues) => ({ ...prevClues, frame: true }));
             toast("New Clue Unlocked: Broken frame found!");
           }
-          if (data.response.includes("glass") && data.response.includes("broken") && !clues.glass) {
+          if (data.response.toLowerCase().includes("glass") && data.response.toLowerCase().includes("broken") && !clues.glass) {
             setClues((prevClues) => ({ ...prevClues, glass: true }));
             toast("New Clue Unlocked: Glass shards discovered!");
           }
-          if (data.response.includes("outside") && data.response.includes("kitchen") && !clues.outside) {
+          if (data.response.toLowerCase().includes("outside") && data.response.toLowerCase().includes("kitchen") && !clues.outside) {
             setClues((prevClues) => ({ ...prevClues, outside: true }));
             toast("New Clue Unlocked: Evidence outside the kitchen!");
           }
@@ -213,22 +229,24 @@ const Home = () => {
   };
 
   // Typing effect
-  useEffect(() => {
-    if (response) {
-      let index = -1;
-      const typingInterval = setInterval(() => {
-        setDisplayedResponse((prev) => prev + response.charAt(index));
-        index++;
-
-        if (index >= response.length) {
-          clearInterval(typingInterval);
-        }
-      }, 50); // Adjust speed by changing the interval time
-
-      // Cleanup on unmount
-      return () => clearInterval(typingInterval);
-    }
-  }, [response]);
+    useEffect(() => {
+      if (response) {
+        let index = 0;
+        let tempResponse = "";
+    
+        const typingInterval = setInterval(() => {
+          tempResponse += response.charAt(index);
+          index++;
+          setDisplayedResponse(tempResponse);
+    
+          if (index >= response.length) {
+            clearInterval(typingInterval);
+          }
+        }, 50);
+    
+        return () => clearInterval(typingInterval);
+      }
+    }, [response]);
   
 
   return (
@@ -392,12 +410,15 @@ const Home = () => {
                     />
                     <button
                       onClick={openModal}
-                      disabled={!clues.death || !clues.guest || !clues.locket} // Disable button if any clue is missing
-                      className={`px-4 py-2 rounded-md ${
-                        killerChosen ||
-                        !clues.death ||
-                        !clues.guest ||
+                      disabled={
+                        !isTimeReached || // Disable before Monday 6 PM
+                        killerChosen || 
+                        !clues.death || 
+                        !clues.guest || 
                         !clues.locket
+                      }
+                      className={`px-4 py-2 rounded-md ${
+                        !isTimeReached || !clues.death || !clues.guest || !clues.locket
                           ? "bg-gray-500 cursor-not-allowed"
                           : "bg-red-500 hover:bg-red-700 text-white"
                       }`}
@@ -512,12 +533,6 @@ const Home = () => {
             </motion.button>
           )}
         </AnimatePresence>
-        <button
-          onClick={togglePlayPause}
-          className="fixed bottom-8 right-8 bg-neutral-900 text-white p-4 rounded-3xl shadow-md focus:outline-none opacity-70 hover:opacity-95"
-        >
-          {isPlaying ? "🎧" : "🔇"}
-        </button>
         <AnimatePresence>
           {isNotepadOpen && (
             <motion.div

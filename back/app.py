@@ -11,9 +11,11 @@ app = Flask(__name__, static_folder="static", template_folder="templates")
 CORS(app)  # Allow Cross-Origin Requests
 
 # Retrieve the API key from the environment
-gemini_api_key = os.getenv("GEMINI_API_KEY")
+gemini_api_key_1 = os.getenv("GEMINI_API_KEY_1")
+gemini_api_key_2 = os.getenv("GEMINI_API_KEY_2")
+gemini_api_key_3 = os.getenv("GEMINI_API_KEY_3")
 # Pass the API key to configure the Google Generative AI library
-genai.configure(api_key=gemini_api_key)
+
 
 suspect_models = {
 
@@ -134,6 +136,16 @@ def ask_character():
     data = request.json
     character = data.get('character')
     user_input = data.get('user_input')
+
+    if (character=='alice'):
+        genai.configure(api_key=gemini_api_key_1)
+        print(gemini_api_key_1)
+    elif(character=='bob'):
+        genai.configure(api_key=gemini_api_key_2)
+        print(gemini_api_key_2)
+    elif(character=='clara'):
+        genai.configure(api_key=gemini_api_key_3)
+        print(gemini_api_key_3)
 
     if character not in suspect_models:
         return jsonify({"error": "Invalid character selected"}), 400
