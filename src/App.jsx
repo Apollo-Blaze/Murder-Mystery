@@ -29,10 +29,9 @@ const App = () => {
       <Analytics />
       <Suspense fallback={<Loader />}>
         <Routes>
-        <Route path="/" element={<LandPage />} />
-          {/* <Route path="/" element={<IntroPage />} />
+          <Route path="/" element={<IntroPage />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/end" element={<EndPage />} /> */}
+          <Route path="/end" element={<EndPage />} />
         </Routes>
       </Suspense>
     </Router>
