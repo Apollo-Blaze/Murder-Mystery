@@ -115,9 +115,9 @@ const Home = () => {
     "garden",
     "diningRoom",
     "kitchen",
-    // "study",
-    // "library",
-    // "balcony",
+    "study",
+    "library",
+    "balcony",
   ];
 
 
@@ -158,7 +158,7 @@ const Home = () => {
       .then((data) => {
         const isCorrect = data.isAlive;
         setKillerChosen(data.isAlive);
-        navigate("/end", { state: { isCorrect, killerName: data.isAlive } });
+        navigate("/end", { state: { isCorrect, killerName: chosenKiller } });
         closeModal();
       })
       .catch((error) => {
