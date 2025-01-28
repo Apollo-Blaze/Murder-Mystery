@@ -411,14 +411,11 @@ const Home = () => {
                     <button
                       onClick={openModal}
                       disabled={
-                        !isTimeReached || // Disable before Monday 6 PM
-                        killerChosen || 
                         !clues.death || 
                         !clues.guest || 
                         !clues.locket
                       }
-                      className={`px-4 py-2 rounded-md ${
-                        !isTimeReached || !clues.death || !clues.guest || !clues.locket
+                      className={`px-4 py-2 rounded-md ${ !clues.death || !clues.guest || !clues.locket
                           ? "bg-gray-500 cursor-not-allowed"
                           : "bg-red-500 hover:bg-red-700 text-white"
                       }`}
